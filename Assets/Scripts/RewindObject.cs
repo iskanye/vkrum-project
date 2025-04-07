@@ -12,6 +12,8 @@ public class RewindObject : StateManager<RewindObject>
     public PhysicsMaterial2D BouncelessMaterial { get => bouncelessMaterial; }
 
     [SerializeField] private new Rigidbody2D rigidbody;
+    
+    [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float maxWriteTime;
     [SerializeField] private Vector2 startVelocity;
     
@@ -29,12 +31,12 @@ public class RewindObject : StateManager<RewindObject>
         simulatedState = new(this);
         rewindState = new(this);
         stopState = new(this);
-            ChangeState(simulatedState);
+        ChangeState(simulatedState);
     }
 
     void OnCollisionEnter2D(Collision2D c)
     {
-        if (currentState is RewindState)
+        if (currentState is RewindState && c.gameObject.layer == obstacleLayer)
         {
             ChangeState(simulatedState);
             RewindMemory.Clear();
