@@ -29,7 +29,16 @@ public class RewindObject : StateManager<RewindObject>
         simulatedState = new(this);
         rewindState = new(this);
         stopState = new(this);
-        Debug.Log(MaxMemorySize);
+            ChangeState(simulatedState);
+    }
+
+    void OnCollisionEnter2D(Collision2D c)
+    {
+        if (currentState is RewindState)
+        {
+            ChangeState(simulatedState);
+            RewindMemory.Clear();
+        } 
     }
 
     public void _Start()
