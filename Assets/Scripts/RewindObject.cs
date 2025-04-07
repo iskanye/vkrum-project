@@ -36,10 +36,9 @@ public class RewindObject : StateManager<RewindObject>
 
     void OnCollisionEnter2D(Collision2D c)
     {
-        if (currentState is RewindState && c.gameObject.layer == obstacleLayer)
+        if (currentState is RewindState && (obstacleLayer & (1 << c.gameObject.layer)) != 0)
         {
             ChangeState(simulatedState);
-            RewindMemory.Clear();
         } 
     }
 
@@ -51,12 +50,12 @@ public class RewindObject : StateManager<RewindObject>
 
     public void StartSimulating() 
     {
-        ChangeState(simulatedState);  
+        ChangeState(simulatedState);
     }
 
     public void StopSimulating() 
     {
-        ChangeState(stopState);  
+        ChangeState(stopState);
     }
 
     public void StartRewind() 

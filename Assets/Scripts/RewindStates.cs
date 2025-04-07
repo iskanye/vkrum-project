@@ -31,20 +31,43 @@ namespace RewindStates
 
         public override IEnumerator Start()
         { 
-            mn.Rigidbody.simulated = false;  
+            float t = 1;
+            while (t > 0) 
+            {
+                Time.timeScale = t;
+                t -= Time.fixedDeltaTime;
+                yield return null;
+            }
             yield return base.Start();
+        }
+
+        public override IEnumerator Stop()
+        { 
+            IsStopping = true;
+            yield return base.Stop();
+            float t = 0;
+            while (t < 1) 
+            {
+                Time.timeScale = t;
+                t += Time.fixedDeltaTime;
+                yield return null;
+            }
+            IsStopping = false;
         }
     }
 
     public class RewindState : State<RewindObject> 
     {
+        private float prevGravity;
+
         public RewindState(RewindObject manager) : base(manager) { }
 
-        public override IEnumerator Start()
+        public override IEnumerator Update()
         {   
             mn.Rigidbody.simulated = true;   
             mn.Rigidbody.sharedMaterial = mn.BouncelessMaterial;
-            mn.Rigidbody.gravityScale /= 2; // TODO: исправить как нибудь это с гравитацией
+            prevGravity = mn.Rigidbody.gravityScale; // TODO: исправить как нибудь это с гравитацией
+            mn.Rigidbody.gravityScale = 0;
 
             while (mn.RewindMemory.Count > 1) 
             {
@@ -59,11 +82,11 @@ namespace RewindStates
 
         public override IEnumerator Stop()
         {
-            mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
-            mn.Rigidbody.gravityScale *= 2; // TODO: исправить как нибудь это с гравитацией
-            mn.Rigidbody.velocity = mn.RewindMemory.Last.Value;
-            mn.RewindMemory.RemoveLast();
             yield return base.Stop();
+            mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
+            mn.Rigidbody.gravityScale = prevGravity; // TODO: исправить как нибудь это с гравитацией
+            mn.Rigidbody.velocity = mn.RewindMemory.Last.Value;
+            mn.RewindMemory.Clear();
         }
     }
 

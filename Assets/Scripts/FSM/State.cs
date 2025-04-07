@@ -3,14 +3,18 @@ using UnityEngine;
 
 public abstract class State<T> where T : MonoBehaviour
 {
+    public bool IsStopping { get; protected set; }
+
     protected T mn;
+
+    private Coroutine update;
 
     public State(T manager) =>
         mn = manager;
 
     public virtual IEnumerator Start() 
     {
-        mn.StartCoroutine(Update());
+        update = mn.StartCoroutine(Update());
         yield break;
     }
 
@@ -21,7 +25,7 @@ public abstract class State<T> where T : MonoBehaviour
 
     public virtual IEnumerator Stop() 
     {
-        mn.StopAllCoroutines();
+        mn.StopCoroutine(update);
         yield break;
     }
 }
