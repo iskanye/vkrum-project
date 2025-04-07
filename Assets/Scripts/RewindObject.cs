@@ -6,36 +6,46 @@ public class RewindObject : StateManager<RewindObject>
 {
     public Rigidbody2D Rigidbody { get => rigidbody; }
     public float MaxWriteTime { get => maxWriteTime; }
-    public Stack<Vector2> RewindMemory { get => rewindMemory; }
+    public LinkedList<Vector2> RewindMemory { get => rewindMemory; }
+    public int MaxMemorySize { get => Mathf.RoundToInt(maxWriteTime / Time.fixedDeltaTime); }
+    public PhysicsMaterial2D BouncyMaterial { get => bouncyMaterial; }
+    public PhysicsMaterial2D BouncelessMaterial { get => bouncelessMaterial; }
 
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private float maxWriteTime;
+    [SerializeField] private Vector2 startVelocity;
+    
+    [SerializeField] private PhysicsMaterial2D bouncyMaterial;
+    [SerializeField] private PhysicsMaterial2D bouncelessMaterial;
 
-    private Stack<Vector2> rewindMemory = new();
+    private LinkedList<Vector2> rewindMemory = new();
 
     private SimulatedState simulatedState;
-    private WriteState writeState;
     private StopState stopState;
     private RewindState rewindState;
 
     void Awake()
     {
         simulatedState = new(this);
-        writeState = new(this);
-        stopState = new(this);
         rewindState = new(this);
-
-        ChangeState(simulatedState);
+        stopState = new(this);
+        Debug.Log(MaxMemorySize);
     }
 
-    public void StartWriting() 
+    public void _Start()
     {
-        ChangeState(writeState);
+        StartSimulating();
+        rigidbody.velocity = startVelocity; 
     }
 
-    public void StopWriting() 
+    public void StartSimulating() 
     {
-        ChangeState(stopState);
+        ChangeState(simulatedState);  
+    }
+
+    public void StopSimulating() 
+    {
+        ChangeState(stopState);  
     }
 
     public void StartRewind() 

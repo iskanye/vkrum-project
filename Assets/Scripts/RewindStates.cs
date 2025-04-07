@@ -7,40 +7,32 @@ namespace RewindStates
     {
         public SimulatedState(RewindObject manager) : base(manager) { }
 
-        public override IEnumerator Start()
+        public override IEnumerator Update()
         {
             mn.Rigidbody.simulated = true;
-            yield return base.Start();
-        }
-    }    
-    
-    public class WriteState : State<RewindObject> 
-    {
-        public WriteState(RewindObject manager) : base(manager) { }
-
-        public override IEnumerator Start()
-        {
-            float t = 0;
+            mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
             
-            while (t <= mn.MaxWriteTime) 
+            while (true) 
             {
-                mn.RewindMemory.Push(-mn.Rigidbody.velocity);
-                t += Time.fixedDeltaTime;
+                Debug.Log(mn.RewindMemory.Count);
+                if (mn.RewindMemory.Count == mn.MaxMemorySize) 
+                {                    
+                    mn.RewindMemory.RemoveFirst();
+                }
+                mn.RewindMemory.AddLast(-mn.Rigidbody.velocity);
+
                 yield return new WaitForFixedUpdate();
             }
-
-            mn.StopWriting();
-            yield break;
         }
-    }
+    } 
 
     public class StopState : State<RewindObject> 
     {
         public StopState(RewindObject manager) : base(manager) { }
 
         public override IEnumerator Start()
-        {
-            mn.Rigidbody.simulated = false;
+        { 
+            mn.Rigidbody.simulated = false;  
             yield return base.Start();
         }
     }
@@ -50,18 +42,26 @@ namespace RewindStates
         public RewindState(RewindObject manager) : base(manager) { }
 
         public override IEnumerator Start()
-        {     
-            mn.Rigidbody.simulated = true;     
+        {   
+            mn.Rigidbody.simulated = true;   
+            mn.Rigidbody.sharedMaterial = mn.BouncelessMaterial;
+            mn.Rigidbody.gravityScale = 0;
 
             while (mn.RewindMemory.Count != 0) 
             {
-                mn.Rigidbody.velocity = mn.RewindMemory.Pop();
-                Debug.Log(mn.Rigidbody.velocity);
+                mn.Rigidbody.velocity = mn.RewindMemory.Last.Value;
+                mn.RewindMemory.RemoveLast();
+                if (mn.RewindMemory.Count == 1) 
+                {
+                    mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
+                    mn.Rigidbody.gravityScale = 2;
+                }
                 yield return new WaitForFixedUpdate();
             }   
-           
-            yield return base.Start();
+        
+            mn.StartSimulating();
+            yield break;
         }
     }
 
-}
+} 
