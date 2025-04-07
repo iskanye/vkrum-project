@@ -45,7 +45,7 @@ namespace RewindStates
         {   
             mn.Rigidbody.simulated = true;   
             mn.Rigidbody.sharedMaterial = mn.BouncelessMaterial;
-            mn.Rigidbody.gravityScale = 0;
+            mn.Rigidbody.gravityScale /= 2; // TODO: исправить как нибудь это с гравитацией
 
             while (mn.RewindMemory.Count != 0) 
             {
@@ -54,7 +54,7 @@ namespace RewindStates
                 if (mn.RewindMemory.Count == 1) 
                 {
                     mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
-                    mn.Rigidbody.gravityScale = 2;
+                    mn.Rigidbody.gravityScale *= 2;
                 }
                 yield return new WaitForFixedUpdate();
             }   
