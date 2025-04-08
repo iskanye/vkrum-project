@@ -30,29 +30,15 @@ namespace RewindStates
         public StopState(RewindObject manager) : base(manager) { }
 
         public override IEnumerator Start()
-        { 
-            float t = 1;
-            while (t > 0) 
-            {
-                Time.timeScale = t;
-                t -= Time.fixedDeltaTime;
-                yield return null;
-            }
+        {
+            Time.timeScale = 0;
             yield return base.Start();
         }
 
         public override IEnumerator Stop()
         { 
-            IsStopping = true;
             yield return base.Stop();
-            float t = 0;
-            while (t < 1) 
-            {
-                Time.timeScale = t;
-                t += Time.fixedDeltaTime;
-                yield return null;
-            }
-            IsStopping = false;
+            Time.timeScale = 1;
         }
     }
 
@@ -63,8 +49,7 @@ namespace RewindStates
         public RewindState(RewindObject manager) : base(manager) { }
 
         public override IEnumerator Update()
-        {   
-            mn.Rigidbody.simulated = true;   
+        {     
             mn.Rigidbody.sharedMaterial = mn.BouncelessMaterial;
             prevGravity = mn.Rigidbody.gravityScale; // TODO: исправить как нибудь это с гравитацией
             mn.Rigidbody.gravityScale = 0;

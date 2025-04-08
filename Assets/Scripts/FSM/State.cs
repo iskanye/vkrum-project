@@ -3,8 +3,6 @@ using UnityEngine;
 
 public abstract class State<T> where T : MonoBehaviour
 {
-    public bool IsStopping { get; protected set; }
-
     protected T mn;
 
     private Coroutine update;

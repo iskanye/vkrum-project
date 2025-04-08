@@ -7,18 +7,10 @@ public abstract class StateManager<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void ChangeState(State<T> state)
     {
-        IEnumerator _ChangeState() 
-        {
-            if (currentState != null) 
-            {
-                StartCoroutine(currentState.Stop());
-                yield return new WaitWhile(() => state.IsStopping);
-            }
-
-            currentState = state;
-            StartCoroutine(currentState.Start());
-            yield break;
-        }
-        StartCoroutine(_ChangeState());
+        if (currentState != null) 
+            StartCoroutine(currentState.Stop());
+        
+        currentState = state;
+        StartCoroutine(currentState.Start());
     }
 }
