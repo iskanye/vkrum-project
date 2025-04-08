@@ -51,7 +51,7 @@ namespace RewindStates
         public override IEnumerator Update()
         {     
             mn.Rigidbody.sharedMaterial = mn.BouncelessMaterial;
-            prevGravity = mn.Rigidbody.gravityScale; // TODO: исправить как нибудь это с гравитацией
+            prevGravity = mn.Rigidbody.gravityScale;
             mn.Rigidbody.gravityScale = 0;
 
             while (mn.RewindMemory.Count > 1) 
@@ -67,11 +67,11 @@ namespace RewindStates
 
         public override IEnumerator Stop()
         {
-            yield return base.Stop();
             mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
-            mn.Rigidbody.gravityScale = prevGravity; // TODO: исправить как нибудь это с гравитацией
+            mn.Rigidbody.gravityScale = prevGravity;
             mn.Rigidbody.velocity = mn.RewindMemory.Last.Value;
             mn.RewindMemory.Clear();
+            yield return base.Stop();
         }
     }
 

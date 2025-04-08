@@ -32,6 +32,7 @@ public class RewindObject : StateManager<RewindObject>
         rewindState = new(this);
         stopState = new(this);
         ChangeState(simulatedState);
+        rigidbody.velocity = startVelocity; 
     }
 
     void OnCollisionEnter2D(Collision2D c)
@@ -40,12 +41,6 @@ public class RewindObject : StateManager<RewindObject>
         {
             ChangeState(simulatedState);
         } 
-    }
-
-    public void _Start()
-    {
-        StartSimulating();
-        rigidbody.velocity = startVelocity; 
     }
 
     public void StartSimulating() 
