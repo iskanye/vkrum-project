@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public partial class RewindObject : StateManager<RewindObject> 
@@ -77,4 +78,15 @@ public partial class RewindObject : StateManager<RewindObject>
         }
     }
 
+    public class DestroyedState : State<RewindObject>
+    {        
+        public DestroyedState(RewindObject manager) : base(manager) { }
+
+        public override IEnumerator Start()
+        {
+            mn.gameObject.SetActive(false);
+            Instantiate(mn.particles, mn.transform.position, Quaternion.identity);
+            yield return base.Start();
+        }
+    }
 } 

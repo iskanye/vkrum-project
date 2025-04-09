@@ -13,6 +13,9 @@ public class ControlButtons : MonoBehaviour
 
     public void StopResume() 
     {
+        if (!rewindObject.gameObject.activeInHierarchy)
+            return;
+
         if (isStopped)
             rewindObject.StartSimulating();
         else
@@ -25,6 +28,9 @@ public class ControlButtons : MonoBehaviour
 
     public void Rewind() 
     {
+        if (!rewindObject.gameObject.activeInHierarchy)
+            return;
+
         rewindObject.StartRewind();
 
         isStopped = false;
