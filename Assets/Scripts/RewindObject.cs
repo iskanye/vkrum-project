@@ -1,15 +1,14 @@
-using RewindStates;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
-public class RewindObject : StateManager<RewindObject>
+public partial class RewindObject : StateManager<RewindObject>
 {
-    public Rigidbody2D Rigidbody { get => rigidbody; }
-    public float MaxWriteTime { get => maxWriteTime; }
+    public event Action OnStartRewind;
+    public event Action OnEndRewind;
+
     public LinkedList<Vector2> RewindMemory { get => rewindMemory; }
     public int MaxMemorySize { get => Mathf.RoundToInt(maxWriteTime / Time.fixedDeltaTime); }
-    public PhysicsMaterial2D BouncyMaterial { get => bouncyMaterial; }
-    public PhysicsMaterial2D BouncelessMaterial { get => bouncelessMaterial; }
 
     [SerializeField] private new Rigidbody2D rigidbody;
     

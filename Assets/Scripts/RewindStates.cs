@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace RewindStates 
+public partial class RewindObject : StateManager<RewindObject> 
 {
     public class SimulatedState : State<RewindObject> 
     {
@@ -9,16 +9,16 @@ namespace RewindStates
 
         public override IEnumerator Update()
         {
-            mn.Rigidbody.simulated = true;
-            mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
+            mn.rigidbody.simulated = true;
+            mn.rigidbody.sharedMaterial = mn.bouncyMaterial;
             
             while (true) 
             {
-                if (mn.RewindMemory.Count == mn.MaxMemorySize) 
+                if (mn.rewindMemory.Count == mn.MaxMemorySize) 
                 {                    
-                    mn.RewindMemory.RemoveFirst();
+                    mn.rewindMemory.RemoveFirst();
                 }
-                mn.RewindMemory.AddLast(-mn.Rigidbody.velocity);
+                mn.rewindMemory.AddLast(-mn.rigidbody.velocity);
 
                 yield return new WaitForFixedUpdate();
             }
@@ -50,14 +50,15 @@ namespace RewindStates
 
         public override IEnumerator Update()
         {     
-            mn.Rigidbody.sharedMaterial = mn.BouncelessMaterial;
-            prevGravity = mn.Rigidbody.gravityScale;
-            mn.Rigidbody.gravityScale = 0;
+            mn.rigidbody.sharedMaterial = mn.bouncelessMaterial;
+            prevGravity = mn.rigidbody.gravityScale;
+            mn.rigidbody.gravityScale = 0;
+            mn.OnStartRewind?.Invoke();
 
-            while (mn.RewindMemory.Count > 1) 
+            while (mn.rewindMemory.Count > 1) 
             {
-                mn.Rigidbody.velocity = mn.RewindMemory.Last.Value;
-                mn.RewindMemory.RemoveLast();
+                mn.rigidbody.velocity = mn.rewindMemory.Last.Value;
+                mn.rewindMemory.RemoveLast();
                 yield return new WaitForFixedUpdate();
             }   
         
@@ -67,10 +68,11 @@ namespace RewindStates
 
         public override IEnumerator Stop()
         {
-            mn.Rigidbody.sharedMaterial = mn.BouncyMaterial;
-            mn.Rigidbody.gravityScale = prevGravity;
-            mn.Rigidbody.velocity = mn.RewindMemory.Last.Value;
-            mn.RewindMemory.Clear();
+            mn.OnEndRewind?.Invoke();
+            mn.rigidbody.sharedMaterial = mn.bouncyMaterial;
+            mn.rigidbody.gravityScale = prevGravity;
+            mn.rigidbody.velocity = mn.rewindMemory.Last.Value;
+            mn.rewindMemory.Clear();
             yield return base.Stop();
         }
     }
