@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ControlButtons : MonoBehaviour
@@ -29,5 +30,10 @@ public class ControlButtons : MonoBehaviour
         isStopped = false;
         stopResumeImage.sprite = stop;
         instrumentsPanel.SetActive(false);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
