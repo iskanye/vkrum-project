@@ -4,6 +4,8 @@ using System;
 
 public partial class RewindBall : StateManager<RewindBall>
 {
+    public static RewindBall Current { get; private set; }
+
     public event Action OnStartRewind;
     public event Action OnEndRewind;
 
@@ -31,6 +33,8 @@ public partial class RewindBall : StateManager<RewindBall>
 
     void Awake()
     {
+        Current = this;
+
         simulatedState = new(this);
         rewindState = new(this);
         stopState = new(this);

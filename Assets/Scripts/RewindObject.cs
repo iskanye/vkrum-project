@@ -12,8 +12,15 @@ public class RewindObject : BaseRewind
     private LinkedList<Vector2> rewindMemory = new();
     private float prevGravity;
 
+    private bool isRewinding;
+
     void FixedUpdate()
     {
+        if (isRewinding) 
+        {
+            return;
+        }
+
         if (rewindMemory.Count == Mathf.RoundToInt(maxWriteTime / Time.fixedDeltaTime)) 
         {                    
            rewindMemory.RemoveFirst();
@@ -25,6 +32,7 @@ public class RewindObject : BaseRewind
     {
         IEnumerator Rewind() 
         {
+            isRewinding = true;
             prevGravity = rigidbody.gravityScale;
             rigidbody.gravityScale = 0;
 
@@ -33,7 +41,9 @@ public class RewindObject : BaseRewind
                 rigidbody.velocity = rewindMemory.Last.Value;
                 rewindMemory.RemoveLast();
                 yield return new WaitForFixedUpdate();
-            }   
+            }  
+
+            StopRewind(); 
         }
         StartCoroutine(Rewind());
     }
@@ -41,5 +51,6 @@ public class RewindObject : BaseRewind
     public override void StopRewind()
     {
         rigidbody.gravityScale = prevGravity;
+        isRewinding = false;
     }
 }

@@ -12,7 +12,13 @@ public class DestroyablePanel : BaseRewind
 
     private List<RewindObject> spawnedParticles = new();
     private float elapsedTime;
-    private bool destroyed;
+    private bool destroyed, canBeDestroyed = true;
+
+    void Start()
+    {
+        RewindBall.Current.OnStartRewind += () => canBeDestroyed = false;
+        RewindBall.Current.OnEndRewind += () => canBeDestroyed = true;
+    }
 
     void Update()
     {
@@ -24,7 +30,7 @@ public class DestroyablePanel : BaseRewind
 
     void OnCollisionEnter2D(Collision2D c)
     {
-        if (destroyed) 
+        if (destroyed || !canBeDestroyed) 
         {
             return;
         }
@@ -54,6 +60,7 @@ public class DestroyablePanel : BaseRewind
             }
 
             yield return new WaitForSeconds(elapsedTime);
+            yield return new WaitForFixedUpdate();
             
             destroyed = false;
             spriteRenderer.enabled = true;
