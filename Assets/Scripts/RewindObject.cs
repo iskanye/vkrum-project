@@ -9,7 +9,8 @@ public class RewindObject : BaseRewind
     [SerializeField] private new Rigidbody2D rigidbody;
     [SerializeField] private float maxWriteTime;
 
-    private LinkedList<Vector2> rewindMemory;
+    private LinkedList<Vector2> rewindMemory = new();
+    private float prevGravity;
 
     void FixedUpdate()
     {
@@ -24,6 +25,9 @@ public class RewindObject : BaseRewind
     {
         IEnumerator Rewind() 
         {
+            prevGravity = rigidbody.gravityScale;
+            rigidbody.gravityScale = 0;
+
             while (rewindMemory.Count != 0) 
             {
                 rigidbody.velocity = rewindMemory.Last.Value;
@@ -32,5 +36,10 @@ public class RewindObject : BaseRewind
             }   
         }
         StartCoroutine(Rewind());
+    }
+
+    public override void StopRewind()
+    {
+        rigidbody.gravityScale = prevGravity;
     }
 }

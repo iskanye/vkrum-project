@@ -48,24 +48,25 @@ public class DestroyablePanel : BaseRewind
     {
         IEnumerator Rewind() 
         {
-            if (elapsedTime < maxWriteTime)
+            if (elapsedTime >= maxWriteTime)
             {
                 yield break;
             }
 
-            float time = elapsedTime, t = 0;
-            while (t < time) 
-            {
-                t += Time.fixedDeltaTime;
-                yield return new WaitForFixedUpdate();
-            }
+            yield return new WaitForSeconds(elapsedTime);
             
             destroyed = false;
             spriteRenderer.enabled = true;
             collider.enabled = true;
-            spawnedParticles.ForEach(i => Destroy(i));
+            elapsedTime = 0;
+            spawnedParticles.ForEach(i => Destroy(i.gameObject));
             spawnedParticles.Clear();
         }
         StartCoroutine(Rewind());
+    }
+
+    public override void StopRewind()
+    {
+        throw new System.NotImplementedException();
     }
 }

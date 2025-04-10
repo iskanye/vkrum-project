@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d1f18d21dd4e042bb4fbcee383daa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewindObject: {fileID: 1996183056}
+  rewindBall: {fileID: 1996183056}
   instrumentsPanel: {fileID: 593162842}
   stopResumeImage: {fileID: 248166618}
   stop: {fileID: 1994111268, guid: f6b3a7a53a43f4041a843653a06fc83d, type: 3}
