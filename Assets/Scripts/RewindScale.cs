@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class RewindScale : MonoBehaviour
 {
     [SerializeField] private Slider scaler;
-    [SerializeField] private RewindObject rewindObject;
+    [SerializeField] private RewindBall rewindObject;
 
     void Update()
     {

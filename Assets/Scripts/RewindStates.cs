@@ -2,11 +2,11 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public partial class RewindObject : StateManager<RewindObject> 
+public partial class RewindBall : StateManager<RewindBall> 
 {
-    public class SimulatedState : State<RewindObject> 
+    public class SimulatedState : State<RewindBall> 
     {
-        public SimulatedState(RewindObject manager) : base(manager) { }
+        public SimulatedState(RewindBall manager) : base(manager) { }
 
         public override IEnumerator Update()
         {
@@ -26,9 +26,9 @@ public partial class RewindObject : StateManager<RewindObject>
         }
     } 
 
-    public class StopState : State<RewindObject> 
+    public class StopState : State<RewindBall> 
     {
-        public StopState(RewindObject manager) : base(manager) { }
+        public StopState(RewindBall manager) : base(manager) { }
 
         public override IEnumerator Start()
         {
@@ -43,11 +43,11 @@ public partial class RewindObject : StateManager<RewindObject>
         }
     }
 
-    public class RewindState : State<RewindObject> 
+    public class RewindState : State<RewindBall> 
     {
         private float prevGravity;
 
-        public RewindState(RewindObject manager) : base(manager) { }
+        public RewindState(RewindBall manager) : base(manager) { }
 
         public override IEnumerator Update()
         {     
@@ -78,9 +78,9 @@ public partial class RewindObject : StateManager<RewindObject>
         }
     }
 
-    public class DestroyedState : State<RewindObject>
+    public class DestroyedState : State<RewindBall>
     {        
-        public DestroyedState(RewindObject manager) : base(manager) { }
+        public DestroyedState(RewindBall manager) : base(manager) { }
 
         public override IEnumerator Start()
         {

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ControlButtons : MonoBehaviour
 {
-    [SerializeField] private RewindObject rewindObject;
+    [SerializeField] private RewindBall rewindBall;
     [SerializeField] private GameObject instrumentsPanel;
     [SerializeField] private Image stopResumeImage;
     [SerializeField] private Sprite stop, resume;
@@ -13,13 +13,13 @@ public class ControlButtons : MonoBehaviour
 
     public void StopResume() 
     {
-        if (!rewindObject.gameObject.activeInHierarchy)
+        if (!rewindBall.gameObject.activeInHierarchy)
             return;
 
         if (isStopped)
-            rewindObject.StartSimulating();
+            rewindBall.StartSimulating();
         else
-            rewindObject.StopSimulating();
+            rewindBall.StopSimulating();
 
         isStopped = !isStopped;
         stopResumeImage.sprite = isStopped ? resume : stop;
@@ -28,10 +28,14 @@ public class ControlButtons : MonoBehaviour
 
     public void Rewind() 
     {
-        if (!rewindObject.gameObject.activeInHierarchy)
+        if (!rewindBall.gameObject.activeInHierarchy)
             return;
 
-        rewindObject.StartRewind();
+        rewindBall.StartRewind();
+        foreach (var i in FindObjectsOfType<BaseRewind>())
+        {
+            i.StartRewind();
+        }
 
         isStopped = false;
         stopResumeImage.sprite = stop;
