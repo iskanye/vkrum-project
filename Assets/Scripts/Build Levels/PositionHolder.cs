@@ -9,9 +9,9 @@ public class PositionHolder : MonoBehaviour, IDragHandler
 
     public void OnDrag(PointerEventData e)
     {
-        transform.position = (Vector2)Camera.main.ScreenToWorldPoint(e.delta);
-        //transform.position = new(
-        //    Mathf.Floor(transform.position.x / grid) * grid,
-        //    Mathf.Floor(transform.position.y / grid) * grid);
+        transform.position = (Vector2)Camera.main.ScreenToWorldPoint(e.position);
+        transform.position = new(
+            Mathf.Floor(transform.position.x / grid) * grid,
+            Mathf.Floor(transform.position.y / grid) * grid);
     }
 }

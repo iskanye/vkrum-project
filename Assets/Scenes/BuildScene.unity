@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8ed242a33c2d34a9609aea269e6cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 1659930774}
   grid: {fileID: 266610487}
   endPoint: {fileID: 0}
   ball: {fileID: 0}
