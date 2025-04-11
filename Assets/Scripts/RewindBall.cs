@@ -8,6 +8,8 @@ public partial class RewindBall : StateManager<RewindBall>
 
     public event Action OnStartRewind;
     public event Action OnEndRewind;
+    public event Action OnDestroy;
+    public event Action OnWin;
 
     public int MaxMemorySize { get => Mathf.RoundToInt(maxWriteTime / Time.fixedDeltaTime); }
     public int MemorySize { get => rewindMemory.Count; }
@@ -56,6 +58,7 @@ public partial class RewindBall : StateManager<RewindBall>
         if (currentState is RewindState && (obstacleLayer & (1 << c.gameObject.layer)) != 0)
         {
             ChangeState(simulatedState);
+            
         } 
     }
 

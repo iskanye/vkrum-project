@@ -13,23 +13,25 @@ public class ControlButtons : MonoBehaviour
 
     void Start()
     {
-        RewindBall.Current.OnStartRewind += () => 
+        void Deactivate() 
         {
             stopResume.interactable = false;
             rewind.interactable = false;
-        };
-        RewindBall.Current.OnEndRewind += () => 
+        }
+        void Activate() 
         {
             stopResume.interactable = true;
             rewind.interactable = true;
-        };
+        }
+
+        RewindBall.Current.OnStartRewind += Deactivate;
+        RewindBall.Current.OnEndRewind += Activate;
+        RewindBall.Current.OnDestroy += Deactivate;
+        RewindBall.Current.OnWin += Deactivate;
     }
 
     public void StopResume() 
     {
-        if (!RewindBall.Current.gameObject.activeInHierarchy)
-            return;
-
         if (isStopped)
             RewindBall.Current.StartSimulating();
         else
@@ -42,9 +44,6 @@ public class ControlButtons : MonoBehaviour
 
     public void Rewind() 
     {
-        if (!RewindBall.Current.gameObject.activeInHierarchy)
-            return;
-
         RewindBall.Current.StartRewind();
         foreach (var i in FindObjectsOfType<BaseRewind>())
         {

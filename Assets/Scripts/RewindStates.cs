@@ -83,6 +83,7 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Start()
         {
+            mn.OnDestroy?.Invoke();
             mn.gameObject.SetActive(false);
             Instantiate(mn.particles, mn.transform.position, Quaternion.identity);
             yield return base.Start();
@@ -92,5 +93,12 @@ public partial class RewindBall : StateManager<RewindBall>
     public class WinState : State<RewindBall>
     {        
         public WinState(RewindBall manager) : base(manager) { }
+
+        public override IEnumerator Start()
+        {
+            mn.OnWin?.Invoke();
+            mn.rigidbody.simulated = false;
+            yield return base.Start();
+        }
     }
 } 
