@@ -9,8 +9,8 @@ public partial class RewindBall : StateManager<RewindBall>
     public event Action OnStartRewind;
     public event Action OnEndRewind;
 
-    public LinkedList<Vector2> RewindMemory { get => rewindMemory; }
     public int MaxMemorySize { get => Mathf.RoundToInt(maxWriteTime / Time.fixedDeltaTime); }
+    public int MemorySize { get => rewindMemory.Count; }
 
     [SerializeField] private new Rigidbody2D rigidbody;
     
@@ -30,6 +30,7 @@ public partial class RewindBall : StateManager<RewindBall>
     private StopState stopState;
     private RewindState rewindState;
     private DestroyedState destroyedState;
+    private WinState winState;
 
     void Awake()
     {
@@ -39,6 +40,8 @@ public partial class RewindBall : StateManager<RewindBall>
         rewindState = new(this);
         stopState = new(this);
         destroyedState = new(this);
+        winState = new(this);
+
         ChangeState(simulatedState);
         rigidbody.velocity = startVelocity; 
     }
@@ -69,5 +72,10 @@ public partial class RewindBall : StateManager<RewindBall>
     public void StartRewind() 
     {
         ChangeState(rewindState);
+    }
+
+    public void Win() 
+    {
+        ChangeState(winState);
     }
 }

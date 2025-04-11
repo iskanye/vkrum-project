@@ -43,8 +43,8 @@ public class DestroyablePanel : BaseRewind
 
             foreach (var i in particlePrefabs) 
             {
-                var obj = Instantiate(i, transform.position, Quaternion.identity);
-                obj.Rigidbody.AddForce(Random.onUnitSphere, ForceMode2D.Impulse);
+                var obj = Instantiate(i, transform.position, transform.rotation);
+                obj.Rigidbody.AddForce(2 * Random.onUnitSphere, ForceMode2D.Impulse);
                 spawnedParticles.Add(obj);
             }
         }

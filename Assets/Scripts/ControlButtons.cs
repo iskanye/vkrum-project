@@ -4,22 +4,36 @@ using UnityEngine.UI;
 
 public class ControlButtons : MonoBehaviour
 {
-    [SerializeField] private RewindBall rewindBall;
+    [SerializeField] private Button stopResume, rewind;
     [SerializeField] private GameObject instrumentsPanel;
     [SerializeField] private Image stopResumeImage;
     [SerializeField] private Sprite stop, resume;
 
     private bool isStopped = false;
 
+    void Start()
+    {
+        RewindBall.Current.OnStartRewind += () => 
+        {
+            stopResume.interactable = false;
+            rewind.interactable = false;
+        };
+        RewindBall.Current.OnEndRewind += () => 
+        {
+            stopResume.interactable = true;
+            rewind.interactable = true;
+        };
+    }
+
     public void StopResume() 
     {
-        if (!rewindBall.gameObject.activeInHierarchy)
+        if (!RewindBall.Current.gameObject.activeInHierarchy)
             return;
 
         if (isStopped)
-            rewindBall.StartSimulating();
+            RewindBall.Current.StartSimulating();
         else
-            rewindBall.StopSimulating();
+            RewindBall.Current.StopSimulating();
 
         isStopped = !isStopped;
         stopResumeImage.sprite = isStopped ? resume : stop;
@@ -28,10 +42,10 @@ public class ControlButtons : MonoBehaviour
 
     public void Rewind() 
     {
-        if (!rewindBall.gameObject.activeInHierarchy)
+        if (!RewindBall.Current.gameObject.activeInHierarchy)
             return;
 
-        rewindBall.StartRewind();
+        RewindBall.Current.StartRewind();
         foreach (var i in FindObjectsOfType<BaseRewind>())
         {
             i.StartRewind();

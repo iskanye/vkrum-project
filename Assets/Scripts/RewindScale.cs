@@ -9,6 +9,6 @@ public class RewindScale : MonoBehaviour
     void Update()
     {
         scaler.maxValue = rewindObject.MaxMemorySize;
-        scaler.value = rewindObject.RewindMemory.Count;
+        scaler.value = rewindObject.MemorySize;
     }
 }

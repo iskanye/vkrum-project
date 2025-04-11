@@ -10,7 +10,6 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Update()
         {
-            mn.rigidbody.simulated = true;
             mn.rigidbody.sharedMaterial = mn.bouncyMaterial;
             
             while (true) 
@@ -88,5 +87,10 @@ public partial class RewindBall : StateManager<RewindBall>
             Instantiate(mn.particles, mn.transform.position, Quaternion.identity);
             yield return base.Start();
         }
+    }
+
+    public class WinState : State<RewindBall>
+    {        
+        public WinState(RewindBall manager) : base(manager) { }
     }
 } 
