@@ -9,7 +9,7 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Update()
         {
-            mn.rigidbody.sharedMaterial = mn.bouncyMaterial;
+            mn.Bounciness = float.PositiveInfinity;
             
             while (true) 
             {
@@ -49,12 +49,12 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Update()
         {     
-            mn.rigidbody.sharedMaterial = mn.bouncelessMaterial;
+            mn.Bounciness = 0;
             prevGravity = mn.rigidbody.gravityScale;
             mn.rigidbody.gravityScale = 0;
             mn.OnStartRewind?.Invoke();
 
-            while (mn.rewindMemory.Count > 1) 
+            while (mn.rewindMemory.Count > 0) 
             {
                 mn.rigidbody.velocity = mn.rewindMemory.Last.Value;
                 mn.rewindMemory.RemoveLast();
@@ -68,9 +68,8 @@ public partial class RewindBall : StateManager<RewindBall>
         public override IEnumerator Stop()
         {
             mn.OnEndRewind?.Invoke();
-            mn.rigidbody.sharedMaterial = mn.bouncyMaterial;
+            mn.Bounciness = float.PositiveInfinity;
             mn.rigidbody.gravityScale = prevGravity;
-            mn.rigidbody.velocity = mn.rewindMemory.Last.Value;
             mn.rewindMemory.Clear();
             yield return base.Stop();
         }
@@ -83,9 +82,9 @@ public partial class RewindBall : StateManager<RewindBall>
         public override IEnumerator Start()
         {
             mn.OnDestroy?.Invoke();
-            mn.gameObject.SetActive(false);
             Instantiate(mn.particles, mn.transform.position, Quaternion.identity);
             yield return base.Start();
+            mn.gameObject.SetActive(false);
         }
     }
 

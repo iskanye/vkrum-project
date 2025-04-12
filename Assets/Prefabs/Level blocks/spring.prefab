@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 201ef6172818ef14fb7b07474e422ceb, type: 3}
-  m_Color: {r: 0.56694746, g: 0.003826994, b: 0.8113208, a: 1}
+  m_Color: {r: 0.56694746, g: 0.003826994, b: 0.8113208, a: 0.56078434}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -115,7 +115,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dc06992735c4e4985280ad02c0b2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  springCoefficient: 2
   ballLayer:
     serializedVersion: 2
     m_Bits: 128

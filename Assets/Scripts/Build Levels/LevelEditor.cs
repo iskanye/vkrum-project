@@ -32,7 +32,7 @@ public class LevelEditor : MonoBehaviour
             2 => Instantiate(spike, new(1, 1, 0), Quaternion.identity, grid),
             3 => Instantiate(trajectoryPoint, new(1, 1, 0), Quaternion.identity, grid),
             4 => Instantiate(spring, new(1, 1, 0), Quaternion.identity, grid),
-            _ => null,
+            _ => null
         };
         var posHolder = obj.AddComponent<PositionHolder>();
     }

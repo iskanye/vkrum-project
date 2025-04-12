@@ -4354,11 +4354,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7840207561934959357, guid: 0a3a8536667422243ad2135882b85bf5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.5
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 7840207561934959357, guid: 0a3a8536667422243ad2135882b85bf5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7840207561934959357, guid: 0a3a8536667422243ad2135882b85bf5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5518,7 +5518,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cb165933c14d2e440947aaa6e7813403, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
@@ -5859,7 +5859,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: f6cea6caa2493a843a8974865c024b13, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5926,8 +5926,7 @@ MonoBehaviour:
     m_Bits: 64
   maxWriteTime: 2
   startVelocity: {x: -10, y: -5}
-  bouncyMaterial: {fileID: 6200000, guid: f6cea6caa2493a843a8974865c024b13, type: 2}
-  bouncelessMaterial: {fileID: 6200000, guid: 2f08464094d1d96468dce7241a95c04e, type: 2}
+  defualtBounciness: 0.8
   particles: {fileID: 8803786879745432266, guid: bcf7276d83ceea94e9738afde1582612, type: 3}
 --- !u!1 &2070129465
 GameObject:
@@ -6401,11 +6400,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3995819699690845279, guid: 8670f7f8b1850c54380f9838ed533350, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3995819699690845279, guid: 8670f7f8b1850c54380f9838ed533350, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3995819699690845279, guid: 8670f7f8b1850c54380f9838ed533350, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6458,11 +6457,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2004150334627349108, guid: 44e8fcd7679fff74abfb93bf99762074, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2004150334627349108, guid: 44e8fcd7679fff74abfb93bf99762074, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2004150334627349108, guid: 44e8fcd7679fff74abfb93bf99762074, type: 3}
       propertyPath: m_LocalPosition.z

@@ -2,14 +2,38 @@ using UnityEngine;
 
 public class Spring : MonoBehaviour 
 {
+    [SerializeField] private float springCoefficient;
     [SerializeField] private LayerMask ballLayer;
 
-    void OnCollisionEnter2D(Collision2D c)
+    private bool triggered = true;
+
+    void Start()
     {
-        if ((ballLayer & (1 << c.gameObject.layer)) != 0) 
+        RewindBall.Current.OnStartRewind += () => triggered = false;
+        RewindBall.Current.OnEndRewind += () => triggered = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D c)
+    {
+        if (triggered && (ballLayer & (1 << c.gameObject.layer)) != 0) 
         {
-            var rigid = c.gameObject.GetComponent<Rigidbody2D>();
-            rigid.AddForce((c.transform.position - transform.position).normalized, ForceMode2D.Impulse);
+            RewindBall.Current.Bounciness = springCoefficient;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D c)
+    {
+        if (triggered && (ballLayer & (1 << c.gameObject.layer)) != 0) 
+        {
+            RewindBall.Current.Bounciness = springCoefficient;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D c)
+    {
+        if (triggered && (ballLayer & (1 << c.gameObject.layer)) != 0) 
+        {
+            RewindBall.Current.Bounciness = float.PositiveInfinity;
         }
     }
 }
