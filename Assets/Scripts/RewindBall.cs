@@ -28,6 +28,7 @@ public partial class RewindBall : StateManager<RewindBall>
             }
         }
     }
+    public Vector2 StartVelocity { set => startVelocity = value; }
 
     [SerializeField] private new Rigidbody2D rigidbody;
     

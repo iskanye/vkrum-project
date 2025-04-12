@@ -52,7 +52,9 @@ public class LevelEditor : MonoBehaviour
         data.endPoint = endPoint.transform.position;
         data.panels = new(); data.destroyablePanels = new();
         data.spikes = new(); data.trajectoryPoints = new();
-        data.spring = new();
+        data.springs = new(); data.panelRotations = new();
+        data.spikeRotations = new(); data.springRotations = new();
+        data.trajectoryPointRotations = new(); data.destroyablePanelRotations = new();
 
         foreach (var i in grid.GetComponentsInChildren<PositionHolder>())
         {
@@ -60,18 +62,23 @@ public class LevelEditor : MonoBehaviour
             {
                 case "panel":
                     data.panels.Add(i.transform.position);
+                    data.panelRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "destr panel":
                     data.destroyablePanels.Add(i.transform.position);
+                    data.destroyablePanelRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "spike":
                     data.spikes.Add(i.transform.position);
+                    data.spikeRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "trajectory":
                     data.trajectoryPoints.Add(i.transform.position);
+                    data.trajectoryPointRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "spring":
-                    data.spring.Add(i.transform.position);
+                    data.springs.Add(i.transform.position);
+                    data.springRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
             }
         }
