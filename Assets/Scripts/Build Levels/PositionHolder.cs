@@ -3,7 +3,9 @@ using UnityEngine.EventSystems;
 
 public class PositionHolder : MonoBehaviour, IDragHandler
 {
-    public string Group { get; set; }
+    public string Group { get => group; set => group = value; }
+
+    [SerializeField] private string group;
 
     private float grid = .5f;
 

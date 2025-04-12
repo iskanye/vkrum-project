@@ -2,9 +2,16 @@ using UnityEngine;
 
 public class EndPoint : MonoBehaviour
 {
-    public static int TrajectoryPoints { get; set; }
+    public static EndPoint Current { get; private set; }
+
+    public int TrajectoryPoints { get; set; }
 
     [SerializeField] private LayerMask ballLayer;
+
+    void Awake()
+    {
+        Current = this;
+    }
 
     void Update()
     {

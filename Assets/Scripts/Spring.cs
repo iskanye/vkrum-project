@@ -9,8 +9,11 @@ public class Spring : MonoBehaviour
 
     void Start()
     {
-        RewindBall.Current.OnStartRewind += () => triggered = false;
-        RewindBall.Current.OnEndRewind += () => triggered = true;
+        if (RewindBall.Current)
+        {
+            RewindBall.Current.OnStartRewind += () => triggered = false;
+            RewindBall.Current.OnEndRewind += () => triggered = true;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D c)

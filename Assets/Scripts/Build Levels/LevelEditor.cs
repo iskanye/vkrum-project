@@ -8,7 +8,7 @@ public class LevelEditor : MonoBehaviour
 
     [SerializeField] private Canvas canvas;
     [SerializeField] private Transform grid;
-    [SerializeField] private GameObject endPoint, ball;    
+    [SerializeField] private PositionHolder endPoint, ball;    
     [Header("Prefabs")]
     [SerializeField] private GameObject panel; 
     [SerializeField] private GameObject destroyablePanel; 
@@ -35,5 +35,47 @@ public class LevelEditor : MonoBehaviour
             _ => null
         };
         var posHolder = obj.AddComponent<PositionHolder>();
+        posHolder.Group = index switch
+        {
+            0 => "panel",
+            1 => "destr panel",
+            2 => "spike",
+            3 => "trajectory",
+            4 => "spring",
+            _ => ""
+        };
+    }
+
+    public void Save() 
+    {
+        data.ball = ball.transform.position;
+        data.endPoint = endPoint.transform.position;
+        data.panels = new(); data.destroyablePanels = new();
+        data.spikes = new(); data.trajectoryPoints = new();
+        data.spring = new();
+
+        foreach (var i in grid.GetComponentsInChildren<PositionHolder>())
+        {
+            switch (i.Group) 
+            {
+                case "panel":
+                    data.panels.Add(i.transform.position);
+                    break;
+                case "destr panel":
+                    data.destroyablePanels.Add(i.transform.position);
+                    break;
+                case "spike":
+                    data.spikes.Add(i.transform.position);
+                    break;
+                case "trajectory":
+                    data.trajectoryPoints.Add(i.transform.position);
+                    break;
+                case "spring":
+                    data.spring.Add(i.transform.position);
+                    break;
+            }
+        }
+
+        Debug.Log(JsonUtility.ToJson(data));
     }
 }
