@@ -6,7 +6,10 @@ public class TrajectoryPoint : MonoBehaviour
 
     void Awake()
     {
-        EndPoint.Current.TrajectoryPoints++;
+        if (EndPoint.Current)
+        {
+            EndPoint.Current.TrajectoryPoints++;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D c)

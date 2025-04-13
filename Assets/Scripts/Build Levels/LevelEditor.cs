@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class LevelEditor : MonoBehaviour
 {
@@ -47,8 +48,12 @@ public class LevelEditor : MonoBehaviour
 
     public void Save() 
     {
-        data.ball = ball.transform.position;
-        data.endPoint = endPoint.transform.position;
+        data.ball = ball.transform.localPosition;
+        data.endPoint = endPoint.transform.localPosition;
+        data.startVelocity = new(Convert.ToSingle(velocityX.text), Convert.ToSingle(velocityY.text));
+        data.defaultBounciness = Convert.ToSingle(bounciness.text);
+        data.gravityScale = 1;
+
         data.panels = new(); data.destroyablePanels = new();
         data.spikes = new(); data.trajectoryPoints = new();
         data.springs = new(); data.panelRotations = new();
@@ -60,23 +65,23 @@ public class LevelEditor : MonoBehaviour
             switch (i.Group) 
             {
                 case "panel":
-                    data.panels.Add(i.transform.position);
+                    data.panels.Add(i.transform.localPosition);
                     data.panelRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "destr panel":
-                    data.destroyablePanels.Add(i.transform.position);
+                    data.destroyablePanels.Add(i.transform.localPosition);
                     data.destroyablePanelRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "spike":
-                    data.spikes.Add(i.transform.position);
+                    data.spikes.Add(i.transform.localPosition);
                     data.spikeRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "trajectory":
-                    data.trajectoryPoints.Add(i.transform.position);
+                    data.trajectoryPoints.Add(i.transform.localPosition);
                     data.trajectoryPointRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
                 case "spring":
-                    data.springs.Add(i.transform.position);
+                    data.springs.Add(i.transform.localPosition);
                     data.springRotations.Add(i.transform.rotation.eulerAngles.z);
                     break;
             }
