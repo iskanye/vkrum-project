@@ -8,12 +8,21 @@ public class Instruments : MonoBehaviour
 
     void Update() 
     {
-        if (spawning && Input.touchCount > 0) 
+        if (spawning) 
         {
-            var t = Input.GetTouch(0);
-            if (t.phase == TouchPhase.Began) 
+            Vector2 pos;
+            if (Input.touchCount > 0)
             {
-                Instantiate(instrument, (Vector2)Camera.main.ScreenToWorldPoint(t.position), Quaternion.identity);
+                pos = Input.GetTouch(0).position;
+            }
+            else 
+            {
+                pos = Input.mousePosition;
+            }
+
+            if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) 
+            {
+                Instantiate(instrument, (Vector2)Camera.main.ScreenToWorldPoint(pos), Quaternion.identity);
                 spawning = false;
             }
         }

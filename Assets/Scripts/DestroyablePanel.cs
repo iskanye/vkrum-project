@@ -16,8 +16,11 @@ public class DestroyablePanel : BaseRewind
 
     void Start()
     {
-        RewindBall.Current.OnStartRewind += () => canBeDestroyed = false;
-        RewindBall.Current.OnEndRewind += () => canBeDestroyed = true;
+        if (RewindBall.Current)
+        {
+            RewindBall.Current.OnStartRewind += () => canBeDestroyed = false;
+            RewindBall.Current.OnEndRewind += () => canBeDestroyed = true;
+        }
     }
 
     void Update()

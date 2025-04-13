@@ -11,17 +11,18 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private GameObject panel; 
     [SerializeField] private GameObject destroyablePanel; 
     [SerializeField] private GameObject spike;
-    [SerializeField] private GameObject trajectoryPoint; 
+    [SerializeField] private TrajectoryPoint trajectoryPoint; 
     [SerializeField] private GameObject spring;
 
     void Awake() 
     {
-        BuildLevel(levelData);
+        var data = JsonUtility.FromJson<LevelData>(levelData);
+        BuildLevel(data);
+        DataTransfer.Current.LevelData = data;
     }
 
-    public void BuildLevel(string json) 
+    public void BuildLevel(LevelData data) 
     {
-        var data = JsonUtility.FromJson<LevelData>(json);
         ball.Initialize(data);
         endPoint.localPosition = data.endPoint;
 
@@ -46,7 +47,7 @@ public class LevelBuilder : MonoBehaviour
         for (int i = 0; i < data.trajectoryPoints.Count; i++)
         {
             Instantiate(trajectoryPoint, data.trajectoryPoints[i] + (Vector2)grid.position, 
-                Quaternion.Euler(0, 0, data.trajectoryPointRotations[i]), grid);
+                Quaternion.Euler(0, 0, data.trajectoryPointRotations[i]), grid).Initialize();
         }
 
         for (int i = 0; i < data.springs.Count; i++)

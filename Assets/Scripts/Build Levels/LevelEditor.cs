@@ -6,7 +6,7 @@ public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor Current { get; private set; }
     
-    [SerializeField] private TMP_InputField velocityX, velocityY, bounciness;
+    [SerializeField] private TMP_InputField velocityX, velocityY, bounciness, gravityScale;
     [SerializeField] private Transform grid;
     [SerializeField] private PositionHolder endPoint, ball;    
     [Header("Prefabs")]
@@ -46,13 +46,58 @@ public class LevelEditor : MonoBehaviour
         };
     }
 
+    public void Load(LevelData data) 
+    {
+        ball.transform.localPosition = data.ball;
+        endPoint.transform.localPosition = data.endPoint;
+        
+        velocityX.text = data.startVelocity.x.ToString(); velocityY.text = data.startVelocity.y.ToString();
+        bounciness.text = data.defaultBounciness.ToString();
+        gravityScale.text = data.gravityScale.ToString();
+
+        for (int i = 0; i < data.panels.Count; i++)
+        {
+            var posHolder = Instantiate(panel, data.panels[i] + (Vector2)grid.position, 
+                Quaternion.Euler(0, 0, data.panelRotations[i]), grid).AddComponent<PositionHolder>();
+            posHolder.Group = "panel";
+        }
+
+        for (int i = 0; i < data.destroyablePanels.Count; i++)
+        {
+            var posHolder = Instantiate(destroyablePanel, data.destroyablePanels[i] + (Vector2)grid.position, 
+                Quaternion.Euler(0, 0, data.destroyablePanelRotations[i]), grid).AddComponent<PositionHolder>();
+            posHolder.Group = "destr panel";
+        }
+
+        for (int i = 0; i < data.spikes.Count; i++)
+        {
+            var posHolder = Instantiate(spike, data.spikes[i] + (Vector2)grid.position, 
+                Quaternion.Euler(0, 0, data.spikeRotations[i]), grid).AddComponent<PositionHolder>();
+            posHolder.Group = "spike";
+        }
+
+        for (int i = 0; i < data.trajectoryPoints.Count; i++)
+        {
+            var posHolder = Instantiate(trajectoryPoint, data.trajectoryPoints[i] + (Vector2)grid.position, 
+                Quaternion.Euler(0, 0, data.trajectoryPointRotations[i]), grid).AddComponent<PositionHolder>();
+            posHolder.Group = "trajectory";
+        }
+
+        for (int i = 0; i < data.springs.Count; i++)
+        {
+            var posHolder = Instantiate(spring, data.springs[i] + (Vector2)grid.position, 
+                Quaternion.Euler(0, 0, data.springRotations[i]), grid).AddComponent<PositionHolder>();
+            posHolder.Group = "spring";
+        }
+    }
+
     public void Save() 
     {
         data.ball = ball.transform.localPosition;
         data.endPoint = endPoint.transform.localPosition;
         data.startVelocity = new(Convert.ToSingle(velocityX.text), Convert.ToSingle(velocityY.text));
         data.defaultBounciness = Convert.ToSingle(bounciness.text);
-        data.gravityScale = 1;
+        data.gravityScale = Convert.ToSingle(gravityScale.text);
 
         data.panels = new(); data.destroyablePanels = new();
         data.spikes = new(); data.trajectoryPoints = new();
@@ -88,5 +133,11 @@ public class LevelEditor : MonoBehaviour
         }
 
         Debug.Log(JsonUtility.ToJson(data));
+    }
+
+    public void Test()
+    {
+        Save();
+        DataTransfer.Current.StartTesting(data);
     }
 }

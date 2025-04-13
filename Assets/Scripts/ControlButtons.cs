@@ -11,7 +11,7 @@ public class ControlButtons : MonoBehaviour
 
     private bool isStopped = false;
 
-    void Start()
+    void Awake()
     {
         void Deactivate() 
         {
@@ -57,6 +57,11 @@ public class ControlButtons : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        DataTransfer.Current.Reload();
+    }
+
+    public void ReturnToEditor() 
+    {
+        DataTransfer.Current.OpenEditor();
     }
 }

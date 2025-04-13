@@ -4,12 +4,9 @@ public class TrajectoryPoint : MonoBehaviour
 {
     [SerializeField] private LayerMask ballLayer;
 
-    void Awake()
+    public void Initialize()
     {
-        if (EndPoint.Current)
-        {
-            EndPoint.Current.TrajectoryPoints++;
-        }
+        EndPoint.Current.TrajectoryPoints++;
     }
 
     void OnTriggerEnter2D(Collider2D c)
