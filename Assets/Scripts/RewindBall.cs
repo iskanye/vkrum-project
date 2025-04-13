@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using UnityEngine.Assertions.Must;
 
 public partial class RewindBall : StateManager<RewindBall>
 {
@@ -28,16 +27,15 @@ public partial class RewindBall : StateManager<RewindBall>
             }
         }
     }
-    public Vector2 StartVelocity { set => startVelocity = value; }
 
     [SerializeField] private new Rigidbody2D rigidbody;
     
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private LayerMask spikeLayer;
     [SerializeField] private float maxWriteTime;
-    [SerializeField] private Vector2 startVelocity;
     
     [SerializeField] private float defualtBounciness;
+    [SerializeField] private float defualtGravity;
 
     [SerializeField] private GameObject particles;
 
@@ -51,7 +49,7 @@ public partial class RewindBall : StateManager<RewindBall>
 
     private float bounciness;
 
-    void Awake()
+    public void Initialize(LevelData data)
     {
         Current = this;
 
@@ -62,8 +60,9 @@ public partial class RewindBall : StateManager<RewindBall>
         winState = new(this);
 
         ChangeState(simulatedState);
-        rigidbody.velocity = startVelocity;
-        bounciness = defualtBounciness;
+        rigidbody.velocity = data.startVelocity;
+        defualtBounciness = bounciness = data.defaultBounciness;
+        defualtGravity = rigidbody.gravityScale = data.gravityScale;
     }
 
     void OnCollisionEnter2D(Collision2D c)

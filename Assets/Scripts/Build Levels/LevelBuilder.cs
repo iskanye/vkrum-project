@@ -19,9 +19,8 @@ public class LevelBuilder : MonoBehaviour
     public void BuildLevel(string json) 
     {
         var data = JsonUtility.FromJson<LevelData>(json);
+        ball.Initialize(data);
         endPoint.position = data.endPoint;
-        ball.transform.position = data.ball;
-        ball.StartVelocity = data.ball;
 
         for (int i = 0; i < data.panels.Count; i++)
         {

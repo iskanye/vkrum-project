@@ -1,12 +1,11 @@
 using UnityEngine;
+using TMPro;
 
 public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor Current { get; private set; }
-
-    public float ScaleFactor { get => canvas.scaleFactor; }
-
-    [SerializeField] private Canvas canvas;
+    
+    [SerializeField] private TMP_InputField velocityX, velocityY, bounciness;
     [SerializeField] private Transform grid;
     [SerializeField] private PositionHolder endPoint, ball;    
     [Header("Prefabs")]

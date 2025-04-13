@@ -5,7 +5,8 @@ using UnityEngine;
 [Serializable]
 public struct LevelData 
 {
-    public Vector2 ball, endPoint;
+    public float defaultBounciness, gravityScale;
+    public Vector2 startVelocity, ball, endPoint;
     public List<Vector2> panels;
     public List<float> panelRotations;
     public List<Vector2> destroyablePanels;

@@ -9,7 +9,7 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Update()
         {
-            mn.Bounciness = float.PositiveInfinity;
+            mn.bounciness = mn.defualtBounciness;
             
             while (true) 
             {
@@ -43,14 +43,11 @@ public partial class RewindBall : StateManager<RewindBall>
 
     public class RewindState : State<RewindBall> 
     {
-        private float prevGravity;
-
         public RewindState(RewindBall manager) : base(manager) { }
 
         public override IEnumerator Update()
         {     
-            mn.Bounciness = 0;
-            prevGravity = mn.rigidbody.gravityScale;
+            mn.bounciness = 0;
             mn.rigidbody.gravityScale = 0;
             mn.OnStartRewind?.Invoke();
 
@@ -68,8 +65,8 @@ public partial class RewindBall : StateManager<RewindBall>
         public override IEnumerator Stop()
         {
             mn.OnEndRewind?.Invoke();
-            mn.Bounciness = float.PositiveInfinity;
-            mn.rigidbody.gravityScale = prevGravity;
+            mn.bounciness = mn.defualtBounciness;
+            mn.rigidbody.gravityScale = mn.defualtGravity;
             mn.rewindMemory.Clear();
             yield return base.Stop();
         }
