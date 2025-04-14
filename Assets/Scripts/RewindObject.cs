@@ -42,14 +42,14 @@ public class RewindObject : BaseRewind
                 rewindMemory.RemoveLast();
                 yield return new WaitForFixedUpdate();
             }  
-
-            StopRewind(); 
         }
         StartCoroutine(Rewind());
     }
 
     public override void StopRewind()
     {
+        StopAllCoroutines();
+        rigidbody.velocity = Vector2.zero;
         rigidbody.gravityScale = prevGravity;
         isRewinding = false;
     }

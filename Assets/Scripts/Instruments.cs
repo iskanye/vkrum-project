@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Instruments : MonoBehaviour
 {
-    [SerializeField] private GameObject instrument;
+    
+    [Header("Prefabs")]
+    [SerializeField] private GameObject panel; 
+    [SerializeField] private GameObject destroyablePanel; 
+    [SerializeField] private GameObject spring;
 
     private bool spawning;
+    private int index;
 
     void Update() 
     {
@@ -22,14 +27,22 @@ public class Instruments : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) 
             {
-                Instantiate(instrument, (Vector2)Camera.main.ScreenToWorldPoint(pos), Quaternion.identity);
+                var instrument = index switch 
+                {
+                    0 => panel,
+                    1 => destroyablePanel,
+                    2 => spring,
+                    _ => null
+                };
+                Instantiate(instrument, (Vector2)Camera.main.ScreenToWorldPoint(pos), instrument.transform.rotation);
                 spawning = false;
             }
         }
     }
 
-    public void SpawnInstruments() 
+    public void SpawnInstruments(int index) 
     {
         spawning = true;
+        this.index = index;
     }
 }

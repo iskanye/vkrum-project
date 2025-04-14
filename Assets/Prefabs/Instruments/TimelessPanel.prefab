@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6999083110536703002}
   - component: {fileID: 5993422068222339760}
   m_Layer: 3
-  m_Name: TimelessObstacle
+  m_Name: TimelessPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -57,7 +57,7 @@ public class DestroyablePanel : BaseRewind
     {
         IEnumerator Rewind() 
         {
-            if (elapsedTime >= maxWriteTime)
+            if (!destroyed || elapsedTime >= maxWriteTime)
             {
                 yield break;
             }
@@ -77,6 +77,6 @@ public class DestroyablePanel : BaseRewind
 
     public override void StopRewind()
     {
-        throw new System.NotImplementedException();
+        StopAllCoroutines();
     }
 }

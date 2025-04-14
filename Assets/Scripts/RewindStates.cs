@@ -65,6 +65,7 @@ public partial class RewindBall : StateManager<RewindBall>
         public override IEnumerator Stop()
         {
             mn.OnEndRewind?.Invoke();
+            BaseRewind.StopRewindAll();
             mn.bounciness = mn.defualtBounciness;
             mn.rigidbody.gravityScale = mn.defualtGravity;
             mn.rewindMemory.Clear();

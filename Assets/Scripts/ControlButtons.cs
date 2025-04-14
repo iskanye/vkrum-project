@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ControlButtons : MonoBehaviour
@@ -45,10 +44,7 @@ public class ControlButtons : MonoBehaviour
     public void Rewind() 
     {
         RewindBall.Current.StartRewind();
-        foreach (var i in FindObjectsOfType<BaseRewind>())
-        {
-            i.StartRewind();
-        }
+        BaseRewind.StartRewindAll();
 
         isStopped = false;
         stopResumeImage.sprite = stop;

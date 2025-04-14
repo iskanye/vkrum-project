@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
 {
-    [SerializeField] [TextArea] private string levelData;
-
     [SerializeField] private Transform grid;
     [SerializeField] private EndPoint endPoint;  
     [SerializeField] private RewindBall ball;  
@@ -14,13 +12,6 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private GameObject spike;
     [SerializeField] private TrajectoryPoint trajectoryPoint; 
     [SerializeField] private GameObject spring;
-
-    void Awake() 
-    {
-        //var data = JsonUtility.FromJson<LevelData>(levelData);
-        //BuildLevel(data);
-        //DataTransfer.Current.LevelData = data;
-    }
 
     public void BuildLevel(LevelData data) 
     {
