@@ -5,7 +5,6 @@ public class EditorCamera : MonoBehaviour, IDragHandler
 {
     public void OnDrag(PointerEventData e)
     {
-        var cam = Camera.main;
-        cam.transform.position -= (Vector3)e.delta / 100;
+        Camera.main.transform.position -= (Vector3)e.delta / 100;
     }
 }
