@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particlePrefabs:
-  - {fileID: 8757094535945258255, guid: b7b48a153d290544fa021f3338d1e778, type: 3}
+  - {fileID: 1388274417616554860, guid: 9db79e3ad1e5df5429d7152b9ce46225, type: 3}
   - {fileID: 8757094535945258255, guid: b7b48a153d290544fa021f3338d1e778, type: 3}
   spriteRenderer: {fileID: 7894798894039949307}
   collider: {fileID: 2910514704773842567}
@@ -152,3 +152,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   maxWriteTime: 2
+  timeless: 1

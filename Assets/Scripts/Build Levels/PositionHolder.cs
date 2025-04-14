@@ -8,24 +8,35 @@ public class PositionHolder : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     [SerializeField] private string group;
 
     private float grid = .5f;
-    private bool canRotate;
+    private bool canInteract;
 
     void Update() 
     {
-        if (canRotate && Input.GetKeyDown(KeyCode.E)) 
+        if (canInteract)
         {
-            transform.Rotate(new(0, 0, 22.5f));
+            if (Input.GetKeyDown(KeyCode.Q)) 
+            {
+                transform.Rotate(new(0, 0, 22.5f));
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                transform.Rotate(new(0, 0, -22.5f));
+            }            
+            if (Input.GetKeyDown(KeyCode.Delete))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     public void OnBeginDrag(PointerEventData e)
     {
-        canRotate = true;
+        canInteract = true;
     }
 
     public void OnEndDrag(PointerEventData e)
     {
-        canRotate = false;
+        canInteract = false;
     }
 
     public void OnDrag(PointerEventData e)

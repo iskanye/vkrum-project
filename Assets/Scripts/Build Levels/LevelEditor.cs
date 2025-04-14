@@ -27,11 +27,11 @@ public class LevelEditor : MonoBehaviour
     {
         GameObject obj = index switch
         {
-            0 => Instantiate(panel, new(1, 1, 0), Quaternion.identity, grid),
-            1 => Instantiate(destroyablePanel, new(1, 1, 0), Quaternion.identity, grid),
-            2 => Instantiate(spike, new(1, 1, 0), Quaternion.identity, grid),
-            3 => Instantiate(trajectoryPoint, new(1, 1, 0), Quaternion.identity, grid),
-            4 => Instantiate(spring, new(1, 1, 0), Quaternion.identity, grid),
+            0 => Instantiate(panel, Vector2.zero, Quaternion.identity, grid),
+            1 => Instantiate(destroyablePanel, Vector2.zero, Quaternion.identity, grid),
+            2 => Instantiate(spike, Vector2.zero, Quaternion.identity, grid),
+            3 => Instantiate(trajectoryPoint, Vector2.zero, Quaternion.identity, grid),
+            4 => Instantiate(spring, Vector2.zero, Quaternion.identity, grid),
             _ => null
         };
         var posHolder = obj.AddComponent<PositionHolder>();

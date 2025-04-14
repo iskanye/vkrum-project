@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 877714119260748245, guid: 9db79e3ad1e5df5429d7152b9ce46225, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5319121439162626814, guid: 9db79e3ad1e5df5429d7152b9ce46225, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

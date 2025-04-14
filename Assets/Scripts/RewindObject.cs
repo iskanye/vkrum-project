@@ -10,7 +10,7 @@ public class RewindObject : BaseRewind
     [SerializeField] private float maxWriteTime;
 
     private LinkedList<Vector2> rewindMemory = new();
-    private float prevGravity;
+    private float prevGravity = 1;
 
     private bool isRewinding;
 
@@ -49,7 +49,6 @@ public class RewindObject : BaseRewind
     public override void StopRewind()
     {
         StopAllCoroutines();
-        rigidbody.velocity = Vector2.zero;
         rigidbody.gravityScale = prevGravity;
         isRewinding = false;
     }

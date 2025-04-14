@@ -53,6 +53,7 @@ public class ControlButtons : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         DataTransfer.Current.Reload();
     }
 

@@ -9,14 +9,15 @@ public class DestroyablePanel : BaseRewind
     [SerializeField] private new Collider2D collider;
     [SerializeField] private LayerMask ballLayer;
     [SerializeField] private float maxWriteTime;
+    [SerializeField] private bool timeless;
 
     private List<RewindObject> spawnedParticles = new();
     private float elapsedTime;
     private bool destroyed, canBeDestroyed = true;
 
-    void Start()
+    void Awake()
     {
-        if (RewindBall.Current)
+        if (!timeless && RewindBall.Current)
         {
             RewindBall.Current.OnStartRewind += () => canBeDestroyed = false;
             RewindBall.Current.OnEndRewind += () => canBeDestroyed = true;
@@ -39,7 +40,7 @@ public class DestroyablePanel : BaseRewind
         }
         
         if ((ballLayer & (1 << c.gameObject.layer)) != 0) 
-        {            
+        {
             destroyed = true;
             spriteRenderer.enabled = false;
             collider.enabled = false;
@@ -47,7 +48,7 @@ public class DestroyablePanel : BaseRewind
             foreach (var i in particlePrefabs) 
             {
                 var obj = Instantiate(i, transform.position, transform.rotation);
-                obj.Rigidbody.AddForce(3 * Random.onUnitSphere, ForceMode2D.Impulse);
+                obj.Rigidbody.AddForce(2 * Random.onUnitSphere, ForceMode2D.Impulse);
                 spawnedParticles.Add(obj);
             }
         }
