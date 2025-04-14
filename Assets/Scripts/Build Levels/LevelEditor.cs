@@ -1,14 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Linq;
 
 public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor Current { get; private set; }
     
+    [SerializeField] private GameObject borders;
     [SerializeField] private TMP_InputField velocityX, velocityY, bounciness, gravityScale, output;
+    [SerializeField] private TMP_InputField sizeX, sizeY;
+    [SerializeField] private TMP_InputField[] restrictions;
     [SerializeField] private Transform grid;
-    [SerializeField] private PositionHolder endPoint, ball;    
+    [SerializeField] private PositionHolder endPoint, ball;  
+    [SerializeField] private Button rotate1, rotate2, delete;  
     [Header("Prefabs")]
     [SerializeField] private GameObject panel; 
     [SerializeField] private GameObject destroyablePanel; 
@@ -17,10 +23,19 @@ public class LevelEditor : MonoBehaviour
     [SerializeField] private GameObject spring;
 
     private LevelData data;
+    private GameObject selected;
 
     void Awake()
     {
         Current = this;
+        endPoint.Initialize(this);
+        ball.Initialize(this);
+    }
+
+    void Update()
+    {        
+        rotate1.interactable = rotate2.interactable = selected != null;
+        delete.interactable = selected != null && selected != endPoint.gameObject && selected != ball.gameObject;
     }
 
     public void SpawnObject(int index) 
@@ -44,6 +59,7 @@ public class LevelEditor : MonoBehaviour
             4 => "spring",
             _ => ""
         };
+        posHolder.Initialize(this);
     }
 
     public void LoadFromString() 
@@ -54,9 +70,11 @@ public class LevelEditor : MonoBehaviour
 
     public void Load(LevelData data) 
     {
+        borders.transform.localScale = data.levelSize;
         ball.transform.localPosition = data.ball;
         endPoint.transform.localPosition = data.endPoint;
         
+        sizeX.text = data.levelSize.x.ToString(); sizeY.text = data.levelSize.y.ToString();
         velocityX.text = data.startVelocity.x.ToString(); velocityY.text = data.startVelocity.y.ToString();
         bounciness.text = data.defaultBounciness.ToString();
         gravityScale.text = data.gravityScale.ToString();
@@ -102,6 +120,7 @@ public class LevelEditor : MonoBehaviour
         data.ball = ball.transform.localPosition;
         data.endPoint = endPoint.transform.localPosition;
         data.startVelocity = new(Convert.ToSingle(velocityX.text), Convert.ToSingle(velocityY.text));
+        data.levelSize = new(Convert.ToSingle(sizeX.text), Convert.ToSingle(sizeY.text), 1);
         data.defaultBounciness = Convert.ToSingle(bounciness.text);
         data.gravityScale = Convert.ToSingle(gravityScale.text);
 
@@ -110,6 +129,7 @@ public class LevelEditor : MonoBehaviour
         data.springs = new(); data.panelRotations = new();
         data.spikeRotations = new(); data.springRotations = new();
         data.trajectoryPointRotations = new(); data.destroyablePanelRotations = new();
+        data.restrictions = restrictions.Select(i => Convert.ToInt32(i.text)).ToList();
 
         foreach (var i in grid.GetComponentsInChildren<PositionHolder>())
         {
@@ -145,5 +165,25 @@ public class LevelEditor : MonoBehaviour
     {
         Save();
         DataTransfer.Current.StartTesting(data);
+    }
+
+    public void UpdateSize()
+    {        
+        borders.transform.localScale = new(Convert.ToSingle(sizeX.text), Convert.ToSingle(sizeY.text), 1);
+    }
+
+    public void Select(GameObject selected)
+    {
+        this.selected = selected;
+    }
+
+    public void Rotate(bool clockwise)
+    {
+        selected.transform.Rotate(0, 0, (clockwise ? -1 : 1) * 22.5f);
+    }
+
+    public void Delete()
+    {
+        Destroy(selected);
     }
 }

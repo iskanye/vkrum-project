@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
 {
+    [SerializeField] private GameObject borders;
+    [SerializeField] private Instruments instruments;
     [SerializeField] private Transform grid;
     [SerializeField] private EndPoint endPoint;  
     [SerializeField] private RewindBall ball;  
@@ -15,9 +17,12 @@ public class LevelBuilder : MonoBehaviour
 
     public void BuildLevel(LevelData data) 
     {
+        borders.transform.localScale = data.levelSize;
         ball.Initialize(data);
+        instruments.Initialize(data);
         buttons.Initialize();
         endPoint.Initialize();
+        ball.transform.localPosition = data.ball;
         endPoint.transform.localPosition = data.endPoint;
 
         for (int i = 0; i < data.panels.Count; i++)

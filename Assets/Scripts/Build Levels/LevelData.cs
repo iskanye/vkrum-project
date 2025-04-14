@@ -6,6 +6,7 @@ using UnityEngine;
 public struct LevelData 
 {
     public float defaultBounciness, gravityScale;
+    public Vector3 levelSize;
     public Vector2 startVelocity, ball, endPoint;
     public List<Vector2> panels;
     public List<float> panelRotations;
@@ -17,4 +18,5 @@ public struct LevelData
     public List<float> trajectoryPointRotations;
     public List<Vector2> springs;
     public List<float> springRotations;
+    public List<int> restrictions;
 }
