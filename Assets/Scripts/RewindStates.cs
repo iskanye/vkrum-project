@@ -36,8 +36,8 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Stop()
         { 
-            yield return base.Stop();
             Time.timeScale = 1;
+            yield return base.Stop();
         }
     }
 

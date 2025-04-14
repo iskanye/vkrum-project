@@ -8,7 +8,7 @@ public class EndPoint : MonoBehaviour
 
     [SerializeField] private LayerMask ballLayer;
 
-    void Awake()
+    public void Initialize()
     {
         Current = this;
     }

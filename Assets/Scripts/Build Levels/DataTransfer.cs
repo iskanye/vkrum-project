@@ -42,6 +42,7 @@ public class DataTransfer : MonoBehaviour
 
         void SceneLoaded(Scene s, LoadSceneMode m) 
         {
+            Debug.Log("loaded");
             FindObjectOfType<LevelBuilder>().BuildLevel(data);
             SceneManager.sceneLoaded -= SceneLoaded;
         }

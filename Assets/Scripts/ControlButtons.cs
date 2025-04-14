@@ -11,7 +11,7 @@ public class ControlButtons : MonoBehaviour
 
     private bool isStopped = false;
 
-    void Awake()
+    public void Initialize()
     {
         void Deactivate() 
         {
@@ -62,6 +62,7 @@ public class ControlButtons : MonoBehaviour
 
     public void ReturnToEditor() 
     {
+        Time.timeScale = 1;
         DataTransfer.Current.OpenEditor();
     }
 }

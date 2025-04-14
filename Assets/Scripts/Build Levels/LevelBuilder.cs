@@ -5,8 +5,9 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] [TextArea] private string levelData;
 
     [SerializeField] private Transform grid;
-    [SerializeField] private Transform endPoint;  
+    [SerializeField] private EndPoint endPoint;  
     [SerializeField] private RewindBall ball;  
+    [SerializeField] private ControlButtons buttons;  
     [Header("Prefabs")]
     [SerializeField] private GameObject panel; 
     [SerializeField] private GameObject destroyablePanel; 
@@ -16,15 +17,17 @@ public class LevelBuilder : MonoBehaviour
 
     void Awake() 
     {
-        var data = JsonUtility.FromJson<LevelData>(levelData);
-        BuildLevel(data);
-        DataTransfer.Current.LevelData = data;
+        //var data = JsonUtility.FromJson<LevelData>(levelData);
+        //BuildLevel(data);
+        //DataTransfer.Current.LevelData = data;
     }
 
     public void BuildLevel(LevelData data) 
     {
         ball.Initialize(data);
-        endPoint.localPosition = data.endPoint;
+        buttons.Initialize();
+        endPoint.Initialize();
+        endPoint.transform.localPosition = data.endPoint;
 
         for (int i = 0; i < data.panels.Count; i++)
         {

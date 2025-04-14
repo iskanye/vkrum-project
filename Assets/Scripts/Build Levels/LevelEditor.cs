@@ -6,7 +6,7 @@ public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor Current { get; private set; }
     
-    [SerializeField] private TMP_InputField velocityX, velocityY, bounciness, gravityScale;
+    [SerializeField] private TMP_InputField velocityX, velocityY, bounciness, gravityScale, output;
     [SerializeField] private Transform grid;
     [SerializeField] private PositionHolder endPoint, ball;    
     [Header("Prefabs")]
@@ -44,6 +44,12 @@ public class LevelEditor : MonoBehaviour
             4 => "spring",
             _ => ""
         };
+    }
+
+    public void LoadFromString() 
+    {
+        DataTransfer.Current.LevelData = JsonUtility.FromJson<LevelData>(output.text);
+        DataTransfer.Current.OpenEditor();
     }
 
     public void Load(LevelData data) 
@@ -132,7 +138,7 @@ public class LevelEditor : MonoBehaviour
             }
         }
 
-        Debug.Log(JsonUtility.ToJson(data));
+        output.text = JsonUtility.ToJson(data);
     }
 
     public void Test()
