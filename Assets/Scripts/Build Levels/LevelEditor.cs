@@ -76,6 +76,12 @@ public class LevelEditor : MonoBehaviour
         
         sizeX.text = data.levelSize.x.ToString(); sizeY.text = data.levelSize.y.ToString();
         velocityX.text = data.startVelocity.x.ToString(); velocityY.text = data.startVelocity.y.ToString();
+
+        for (int i = 0; i < 3; i++) 
+        {
+            restrictions[i].text = data.restrictions[i].ToString();
+        }
+
         bounciness.text = data.defaultBounciness.ToString();
         gravityScale.text = data.gravityScale.ToString();
 
