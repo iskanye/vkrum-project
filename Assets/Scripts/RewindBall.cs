@@ -37,7 +37,7 @@ public partial class RewindBall : StateManager<RewindBall>
     [SerializeField] private float defualtBounciness;
     [SerializeField] private float defualtGravity;
 
-    [SerializeField] private TrailRenderer trail;
+    [SerializeField] private GameObject trail;
     [SerializeField] private GameObject particles;
 
     private LinkedList<Vector2> rewindMemory = new();
@@ -61,7 +61,7 @@ public partial class RewindBall : StateManager<RewindBall>
         winState = new(this);
 
         ChangeState(simulatedState);
-        trail.emitting = true;
+        trail.SetActive(true);
         rigidbody.velocity = data.startVelocity;
         defualtBounciness = bounciness = data.defaultBounciness;
         defualtGravity = rigidbody.gravityScale = data.gravityScale;

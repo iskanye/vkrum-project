@@ -3,8 +3,6 @@ using UnityEngine.EventSystems;
 
 public class EditorCamera : MonoBehaviour, IDragHandler
 {
-    [SerializeField] private Canvas canvas;
-
     public void OnDrag(PointerEventData e)
     {
         var cam = Camera.main;

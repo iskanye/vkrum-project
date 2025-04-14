@@ -2781,7 +2781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1348664241
 Transform:
   m_ObjectHideFlags: 0
@@ -2908,7 +2908,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0
-  m_Emitting: 0
+  m_Emitting: 1
   m_ApplyActiveColorSpace: 1
 --- !u!1 &1568296779
 GameObject:
@@ -3769,7 +3769,7 @@ MonoBehaviour:
   maxWriteTime: 2
   defualtBounciness: 0.8
   defualtGravity: 0
-  trail: {fileID: 1348664242}
+  trail: {fileID: 1348664240}
   particles: {fileID: 8803786879745432266, guid: bcf7276d83ceea94e9738afde1582612, type: 3}
 --- !u!1 &2064523545
 GameObject:

@@ -55,6 +55,6 @@ public class Instruments : MonoBehaviour
     public void Delete()
     {
         restrictions[selected.Type]++;
-        Destroy(selected);
+        Destroy(selected.gameObject);
     }
 }
