@@ -28,8 +28,6 @@ public class LevelEditor : MonoBehaviour
     void Awake()
     {
         Current = this;
-        endPoint.Initialize(this);
-        ball.Initialize(this);
     }
 
     void Update()
@@ -59,7 +57,6 @@ public class LevelEditor : MonoBehaviour
             4 => "spring",
             _ => ""
         };
-        posHolder.Initialize(this);
     }
 
     public void LoadFromString() 
