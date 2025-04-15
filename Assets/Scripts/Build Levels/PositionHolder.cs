@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PositionHolder : MonoBehaviour, IDragHandler
+public class PositionHolder : MonoBehaviour, IDragHandler, IPointerClickHandler
 {
     public string Group { get => group; set => group = value; }
 
@@ -16,5 +16,10 @@ public class PositionHolder : MonoBehaviour, IDragHandler
         transform.position = new(
             Mathf.Floor(transform.position.x / grid) * grid,
             Mathf.Floor(transform.position.y / grid) * grid);
+    }
+
+    public void OnPointerClick(PointerEventData e)
+    {
+        LevelEditor.Current.Select(gameObject);;
     }
 }

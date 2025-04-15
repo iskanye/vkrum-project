@@ -10,6 +10,8 @@ public partial class RewindBall : StateManager<RewindBall>
     public event Action OnEndRewind;
     public event Action OnDestroy;
     public event Action OnWin;
+    public event Action OnStartStop;
+    public event Action OnEndStop;
 
     public int MaxMemorySize { get => Mathf.RoundToInt(maxWriteTime / Time.fixedDeltaTime); }
     public int MemorySize { get => rewindMemory.Count; }
@@ -60,11 +62,12 @@ public partial class RewindBall : StateManager<RewindBall>
         destroyedState = new(this);
         winState = new(this);
 
-        ChangeState(simulatedState);
         trail.SetActive(true);
         rigidbody.velocity = data.startVelocity;
         defualtBounciness = bounciness = data.defaultBounciness;
         defualtGravity = rigidbody.gravityScale = data.gravityScale;
+        
+        ChangeState(simulatedState);
     }
 
     void OnCollisionEnter2D(Collision2D c)

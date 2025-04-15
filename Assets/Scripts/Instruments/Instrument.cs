@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Instrument : MonoBehaviour, IDragHandler
+public class Instrument : MonoBehaviour, IDragHandler, IPointerClickHandler
 {
     public int Type { get; private set; }
 
@@ -12,6 +12,8 @@ public class Instrument : MonoBehaviour, IDragHandler
     {
         Type = type;
         this.manager = manager;
+        RewindBall.Current.OnStartStop += Activate;
+        RewindBall.Current.OnEndStop += Deactivate;
     }
 
     public void OnDrag(PointerEventData e)
@@ -21,5 +23,26 @@ public class Instrument : MonoBehaviour, IDragHandler
         transform.position = new(
             Mathf.Floor(transform.position.x / grid) * grid,
             Mathf.Floor(transform.position.y / grid) * grid);
+    }
+
+    public void OnPointerClick(PointerEventData e)
+    {
+        manager.Select(this);;
+    }
+
+    void OnDestroy()
+    {
+        RewindBall.Current.OnStartStop -= Activate;
+        RewindBall.Current.OnEndStop -= Deactivate;
+    }
+
+    void Activate()
+    {
+        enabled = true;
+    }
+
+    void Deactivate()
+    {
+        enabled = false;    
     }
 }

@@ -30,12 +30,14 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Start()
         {
+            mn.OnStartStop?.Invoke();
             Time.timeScale = 0;
             yield return base.Start();
         }
 
         public override IEnumerator Stop()
         { 
+            mn.OnEndStop?.Invoke();
             Time.timeScale = 1;
             yield return base.Stop();
         }

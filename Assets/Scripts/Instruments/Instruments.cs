@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +35,7 @@ public class Instruments : MonoBehaviour
             2 => spring,
             _ => null
         };
-        Instantiate(instrument, Vector2.zero, instrument.transform.rotation)
+        Instantiate(instrument, (Vector2)Camera.main.transform.position, instrument.transform.rotation)
             .AddComponent<Instrument>().Initialize(this, index);
 
         restrictions[index]--;
