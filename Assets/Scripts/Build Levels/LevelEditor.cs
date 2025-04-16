@@ -3,12 +3,14 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Linq;
+using System.Collections;
 
 public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor Current { get; private set; }
     
     [SerializeField] private GameObject borders;
+    [SerializeField] private TMP_Text messageField;
     [SerializeField] private TMP_InputField velocityX, velocityY, bounciness, gravityScale, output;
     [SerializeField] private TMP_InputField sizeX, sizeY;
     [SerializeField] private TMP_InputField[] restrictions;
@@ -118,14 +120,19 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
+    float ToFloat(string str)
+    {
+        return Convert.ToSingle(str.Replace('.', ','));
+    }
+
     public void Save() 
     {
         data.ball = ball.transform.localPosition;
         data.endPoint = endPoint.transform.localPosition;
-        data.startVelocity = new(Convert.ToSingle(velocityX.text), Convert.ToSingle(velocityY.text));
-        data.levelSize = new(Convert.ToSingle(sizeX.text), Convert.ToSingle(sizeY.text), 1);
-        data.defaultBounciness = Convert.ToSingle(bounciness.text);
-        data.gravityScale = Convert.ToSingle(gravityScale.text);
+        data.startVelocity = new(ToFloat(velocityX.text), ToFloat(velocityY.text));
+        data.levelSize = new(ToFloat(sizeX.text), ToFloat(sizeY.text), 1);
+        data.defaultBounciness = ToFloat(bounciness.text);
+        data.gravityScale = ToFloat(gravityScale.text);
 
         data.panels = new(); data.destroyablePanels = new();
         data.spikes = new(); data.trajectoryPoints = new();
@@ -166,7 +173,15 @@ public class LevelEditor : MonoBehaviour
 
     public void Test()
     {
-        Save();
+        try
+        {           
+            Save();        
+        }
+        catch
+        {
+            Message("Ошибка: неверный формат данных");
+            return;
+        }
         DataTransfer.Current.StartTesting(data);
     }
 
@@ -188,5 +203,16 @@ public class LevelEditor : MonoBehaviour
     public void Delete()
     {
         Destroy(selected);
+    }
+
+    public void Message(string msg)
+    {
+        IEnumerator Msg()
+        {
+            messageField.text = msg;
+            yield return new WaitForSeconds(3);
+            messageField.text = "";
+        }
+        StartCoroutine(Msg());
     }
 }
