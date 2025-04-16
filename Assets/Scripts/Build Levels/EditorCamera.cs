@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class EditorCamera : MonoBehaviour, IDragHandler
 {
-    [SerializeField] private float minCameraSize = 3, maxCameraSize = 18;
+    [SerializeField] private float minCameraSize = 1, maxCameraSize = 12;
 
     void Update()
     {

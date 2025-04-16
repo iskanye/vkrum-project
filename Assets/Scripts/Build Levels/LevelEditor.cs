@@ -32,8 +32,8 @@ public class LevelEditor : MonoBehaviour
 
     void Update()
     {        
-        rotate1.interactable = rotate2.interactable = selected != null;
-        delete.interactable = selected != null && selected != endPoint.gameObject && selected != ball.gameObject;
+        rotate1.interactable = rotate2.interactable = delete.interactable 
+            = selected != null && selected != endPoint.gameObject && selected != ball.gameObject;
     }
 
     public void SpawnObject(int index) 
