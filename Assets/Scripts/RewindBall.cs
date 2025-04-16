@@ -12,6 +12,7 @@ public partial class RewindBall : StateManager<RewindBall>
     public event Action OnWin;
     public event Action OnStartStop;
     public event Action OnEndStop;
+    public event Action OnStartSimulation;
 
     public int MaxMemorySize { get => Mathf.RoundToInt(maxWriteTime / Time.fixedDeltaTime); }
     public int MemorySize { get => rewindMemory.Count; }

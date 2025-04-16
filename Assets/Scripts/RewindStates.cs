@@ -9,6 +9,7 @@ public partial class RewindBall : StateManager<RewindBall>
 
         public override IEnumerator Update()
         {
+            mn.OnStartSimulation?.Invoke();
             mn.bounciness = mn.defualtBounciness;
             
             while (true) 

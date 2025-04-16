@@ -8,6 +8,7 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private EndPoint endPoint;  
     [SerializeField] private RewindBall ball;  
     [SerializeField] private ControlButtons buttons;  
+    [SerializeField] private MusicController music;  
     [Header("Prefabs")]
     [SerializeField] private GameObject panel; 
     [SerializeField] private GameObject destroyablePanel; 
@@ -17,13 +18,15 @@ public class LevelBuilder : MonoBehaviour
 
     public void BuildLevel(LevelData data) 
     {
+        ball.transform.localPosition = data.ball;
+        endPoint.transform.localPosition = data.endPoint;
         borders.transform.localScale = data.levelSize;
+
         ball.Initialize(data);
         instruments.Initialize(data);
         buttons.Initialize();
         endPoint.Initialize();
-        ball.transform.localPosition = data.ball;
-        endPoint.transform.localPosition = data.endPoint;
+        music.Initialize();
 
         for (int i = 0; i < data.panels.Count; i++)
         {
