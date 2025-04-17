@@ -71,7 +71,6 @@ public partial class RewindBall : StateManager<RewindBall>
             BaseRewind.StopRewindAll();
             mn.bounciness = mn.defualtBounciness;
             mn.rigidbody.gravityScale = mn.defualtGravity;
-            mn.rewindMemory.Clear();
             yield return base.Stop();
         }
     }
@@ -86,6 +85,10 @@ public partial class RewindBall : StateManager<RewindBall>
             Instantiate(mn.particles, mn.transform.position, Quaternion.identity);
             yield return base.Start();
             mn.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(mn.defeatDelay);
+            DataTransfer.Current.Reload();
+            mn.AfterDestroy?.Invoke();
         }
     }
 
@@ -98,6 +101,9 @@ public partial class RewindBall : StateManager<RewindBall>
             mn.OnWin?.Invoke();
             mn.rigidbody.simulated = false;
             yield return base.Start();
+            
+            yield return new WaitForSeconds(mn.winDelay);
+            mn.AfterWin?.Invoke();
         }
     }
 } 

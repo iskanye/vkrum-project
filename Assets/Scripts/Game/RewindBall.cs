@@ -9,7 +9,9 @@ public partial class RewindBall : StateManager<RewindBall>
     public event Action OnStartRewind;
     public event Action OnEndRewind;
     public event Action OnDestroy;
+    public event Action AfterDestroy;
     public event Action OnWin;
+    public event Action AfterWin;
     public event Action OnStartStop;
     public event Action OnEndStop;
     public event Action OnStartSimulation;
@@ -36,6 +38,8 @@ public partial class RewindBall : StateManager<RewindBall>
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private LayerMask spikeLayer;
     [SerializeField] private float maxWriteTime;
+    [SerializeField] private float defeatDelay = 6;
+    [SerializeField] private float winDelay = 6;
     
     [SerializeField] private float defualtBounciness;
     [SerializeField] private float defualtGravity;

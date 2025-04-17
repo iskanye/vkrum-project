@@ -1700,8 +1700,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -902532129, guid: f6b3a7a53a43f4041a843653a06fc83d, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 201ef6172818ef14fb7b07474e422ceb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2787,6 +2787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f2e4456f934fa4f9e6e7396a982d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editorButton: {fileID: 1988857234}
   borders: {fileID: 1087494825}
   instruments: {fileID: 593162844}
   grid: {fileID: 1206324233}
@@ -3969,12 +3970,12 @@ GameObject:
   - component: {fileID: 1988857237}
   - component: {fileID: 1988857236}
   m_Layer: 5
-  m_Name: test
+  m_Name: editor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1988857235
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4146,8 +4147,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fbeeb9945266ca640bdac7ae8f70f768, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 201ef6172818ef14fb7b07474e422ceb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

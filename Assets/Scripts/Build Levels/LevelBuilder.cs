@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LevelBuilder : MonoBehaviour
 {
+    [SerializeField] private GameObject editorButton;
     [SerializeField] private GameObject borders;
     [SerializeField] private Instruments instruments;
     [SerializeField] private Transform grid;
@@ -16,13 +17,15 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private TrajectoryPoint trajectoryPoint; 
     [SerializeField] private GameObject spring;
 
-    public void BuildLevel(LevelData data) 
+    public void BuildLevel(LevelData data, bool editor = false) 
     {
+        editorButton.SetActive(editor);
         ball.transform.localPosition = data.ball;
         endPoint.transform.localPosition = data.endPoint;
         borders.transform.localScale = data.levelSize;
 
         ball.Initialize(data);
+        ball.AfterDestroy += DataTransfer.Current.Reload;
         instruments.Initialize(data);
         buttons.Initialize();
         endPoint.Initialize();

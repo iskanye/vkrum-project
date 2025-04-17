@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DataTransfer : MonoBehaviour 
 {
     public static DataTransfer Current { get; private set; }
+    public event Action OnLevelLoaded;
 
     public LevelData LevelData { set => currentData = value; }
 
@@ -32,26 +34,27 @@ public class DataTransfer : MonoBehaviour
             SceneManager.sceneLoaded -= SceneLoaded;
         }
 
-        SceneManager.LoadScene(editorSceneIndex);
         SceneManager.sceneLoaded += SceneLoaded;
+        SceneManager.LoadScene(editorSceneIndex);
     }
 
-    public void StartTesting(LevelData data) 
+    public void LoadLevel(LevelData data, bool editor = false) 
     {
         currentData = data;
 
         void SceneLoaded(Scene s, LoadSceneMode m) 
         {
-            FindObjectOfType<LevelBuilder>().BuildLevel(data);
+            FindObjectOfType<LevelBuilder>().BuildLevel(data, editor);
+            OnLevelLoaded?.Invoke();
             SceneManager.sceneLoaded -= SceneLoaded;
         }
 
-        SceneManager.LoadScene(playSceneIndex);
         SceneManager.sceneLoaded += SceneLoaded;
+        SceneManager.LoadScene(playSceneIndex);
     }
 
     public void Reload()
     {
-        StartTesting(currentData);
+        LoadLevel(currentData);
     }
 }

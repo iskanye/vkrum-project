@@ -182,7 +182,7 @@ public class LevelEditor : MonoBehaviour
             Message("Ошибка: неверный формат данных");
             return;
         }
-        DataTransfer.Current.StartTesting(data);
+        DataTransfer.Current.LoadLevel(data, true);
     }
 
     public void UpdateSize()
