@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
@@ -41,12 +42,15 @@ public class LevelChanger : MonoBehaviour
 
     public void NextLevel()
     {
-        if (current == levels.Length)
+        if (current == levels.Length - 1)
         {
+            PlayerPrefs.SetInt("editor", 1);
+            SceneManager.LoadScene(0);
             return;
         }
 
         current++;
+        PlayerPrefs.SetInt("current_level", current);
         Continue();
     }
 

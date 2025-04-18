@@ -4335,8 +4335,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxWriteTime: 2
+  defeatDelay: 3
+  winDelay: 3
   defualtBounciness: 0.8
   defualtGravity: 0
+  spriteRenderer: {fileID: 1996183052}
   trail: {fileID: 1348664240}
   particles: {fileID: 8803786879745432266, guid: bcf7276d83ceea94e9738afde1582612, type: 3}
 --- !u!1 &2064523545

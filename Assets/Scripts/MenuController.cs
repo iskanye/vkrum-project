@@ -8,7 +8,7 @@ public class MenuController : MonoBehaviour
 
     void Awake()
     {
-        if (PlayerPrefs.GetInt("editor") == 1)
+        if (PlayerPrefs.GetInt("editor", 0) == 1)
         {
             editorButton.SetActive(true);
         }   

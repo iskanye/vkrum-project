@@ -44,6 +44,7 @@ public partial class RewindBall : StateManager<RewindBall>
     [SerializeField] private float defualtBounciness;
     [SerializeField] private float defualtGravity;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject trail;
     [SerializeField] private GameObject particles;
 

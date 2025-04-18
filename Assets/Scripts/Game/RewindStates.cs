@@ -83,11 +83,11 @@ public partial class RewindBall : StateManager<RewindBall>
         {
             mn.OnDestroy?.Invoke();
             Instantiate(mn.particles, mn.transform.position, Quaternion.identity);
+            mn.rigidbody.simulated = false;
+            mn.spriteRenderer.enabled = false;
             yield return base.Start();
-            mn.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(mn.defeatDelay);
-            DataTransfer.Current.Reload();
             mn.AfterDestroy?.Invoke();
         }
     }
