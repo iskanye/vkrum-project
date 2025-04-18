@@ -63,8 +63,15 @@ public class LevelEditor : MonoBehaviour
 
     public void LoadFromString() 
     {
-        DataTransfer.Current.LevelData = JsonUtility.FromJson<LevelData>(output.text);
-        DataTransfer.Current.OpenEditor();
+        try 
+        {
+            DataTransfer.Current.LevelData = JsonUtility.FromJson<LevelData>(output.text);
+            DataTransfer.Current.OpenEditor();
+        }
+        catch
+        {
+            Message("Ошибка: невозможно прочесть данные уровня");
+        }
     }
 
     public void Load(LevelData data) 
@@ -175,22 +182,21 @@ public class LevelEditor : MonoBehaviour
     {
         try
         {           
-            Save();        
+            Save(); 
+
+            void OpenEditor()
+            {
+                RewindBall.Current.AfterWin += DataTransfer.Current.OpenEditor;
+                DataTransfer.Current.OnLevelLoaded -= OpenEditor;
+            }
+
+            DataTransfer.Current.OnLevelLoaded += OpenEditor;
+            DataTransfer.Current.LoadLevel(data, true);       
         }
         catch
         {
             Message("Ошибка: неверный формат данных");
-            return;
         }
-
-        void OpenEditor()
-        {
-            RewindBall.Current.AfterWin += DataTransfer.Current.OpenEditor;
-            DataTransfer.Current.OnLevelLoaded -= OpenEditor;
-        }
-
-        DataTransfer.Current.OnLevelLoaded += OpenEditor;
-        DataTransfer.Current.LoadLevel(data, true);
     }
 
     public void UpdateSize()

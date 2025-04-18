@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - ' {"defaultBounciness":0.800000011920929,"gravityScale":1.0,"levelSize":{"x":12.0,"y":10.0,"z":1.0},"startVelocity":{"x":-5.0,"y":-5.0},"ball":{"x":2.0,"y":3.0},"endPoint":{"x":4.5,"y":3.5},"panels":[{"x":1.5,"y":1.5},{"x":4.5,"y":2.5},{"x":-1.5,"y":0.5},{"x":-4.5,"y":-0.5}],"panelRotations":[0.0,0.0,0.0,0.0],"destroyablePanels":[],"destroyablePanelRotations":[],"spikes":[],"spikeRotations":[],"trajectoryPoints":[],"trajectoryPointRotations":[],"springs":[],"springRotations":[],"restrictions":[0,0,0]}'
+  - '{"defaultBounciness":0.800000011920929,"gravityScale":1.0,"levelSize":{"x":12.0,"y":10.0,"z":1.0},"startVelocity":{"x":-5.0,"y":-5.0},"ball":{"x":2.0,"y":3.0},"endPoint":{"x":4.5,"y":3.5},"panels":[{"x":1.5,"y":1.5},{"x":4.5,"y":2.5},{"x":-1.5,"y":0.5},{"x":-4.5,"y":-0.5}],"panelRotations":[0.0,0.0,0.0,0.0],"destroyablePanels":[],"destroyablePanelRotations":[],"spikes":[],"spikeRotations":[],"trajectoryPoints":[],"trajectoryPointRotations":[],"springs":[],"springRotations":[],"restrictions":[0,0,0]}'
   - '{"defaultBounciness":0.800000011920929,"gravityScale":1.0,"levelSize":{"x":28.0,"y":28.0,"z":1.0},"startVelocity":{"x":-5.0,"y":-5.0},"ball":{"x":7.5,"y":5.5},"endPoint":{"x":-3.0,"y":6.0},"panels":[{"x":1.5,"y":1.5},{"x":4.5,"y":2.5},{"x":-1.5,"y":0.5},{"x":-4.5,"y":-0.5},{"x":-3.0,"y":4.5},{"x":7.5,"y":3.5}],"panelRotations":[0.0,0.0,0.0,0.0,0.0,0.0],"destroyablePanels":[],"destroyablePanelRotations":[],"spikes":[],"spikeRotations":[],"trajectoryPoints":[],"trajectoryPointRotations":[],"springs":[],"springRotations":[],"restrictions":[1,0,0]}'
   - '{"defaultBounciness":0.800000011920929,"gravityScale":1.0,"levelSize":{"x":16.0,"y":16.0,"z":1.0},"startVelocity":{"x":-5.0,"y":-5.0},"ball":{"x":5.0,"y":4.0},"endPoint":{"x":7.0,"y":3.0},"panels":[{"x":6.5,"y":1.5},{"x":3.5,"y":1.5},{"x":1.0,"y":1.5},{"x":-1.5,"y":1.0}],"panelRotations":[0.0,0.0,0.0,0.0],"destroyablePanels":[],"destroyablePanelRotations":[],"spikes":[{"x":-3.5,"y":1.0},{"x":-1.5,"y":2.0},{"x":-5.5,"y":1.0},{"x":-4.5,"y":1.0},{"x":-6.5,"y":1.0}],"spikeRotations":[0.0,0.0,0.0,0.0,0.0],"trajectoryPoints":[{"x":-4.5,"y":3.5}],"trajectoryPointRotations":[0.0],"springs":[],"springRotations":[],"restrictions":[1,0,0]}'
   - '{"defaultBounciness":0.800000011920929,"gravityScale":1.0,"levelSize":{"x":28.0,"y":10.0,"z":1.0},"startVelocity":{"x":-5.0,"y":-5.0},"ball":{"x":3.5,"y":-1.5},"endPoint":{"x":6.0,"y":-2.0},"panels":[{"x":3.5,"y":-3.0},{"x":0.5,"y":-3.0},{"x":6.5,"y":-3.0},{"x":7.5,"y":-1.0},{"x":7.5,"y":2.0}],"panelRotations":[0.0,0.0,0.0,270.0,270.0],"destroyablePanels":[{"x":-2.5,"y":-3.0},{"x":-5.5,"y":-3.0},{"x":-8.5,"y":-3.0}],"destroyablePanelRotations":[0.0,0.0,0.0],"spikes":[],"spikeRotations":[],"trajectoryPoints":[{"x":-9.0,"y":-1.5}],"trajectoryPointRotations":[0.0],"springs":[],"springRotations":[],"restrictions":[0,0,0]}'
@@ -1360,7 +1360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1289323451
 RectTransform:
   m_ObjectHideFlags: 0

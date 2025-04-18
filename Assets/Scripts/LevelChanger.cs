@@ -38,8 +38,8 @@ public class LevelChanger : MonoBehaviour
     public void NewGame()
     {
         current = 0;
-        DataTransfer.Current.LoadLevel(levelDatas[0]);
         DataTransfer.Current.OnLevelLoaded += ChangeLevel;
+        DataTransfer.Current.LoadLevel(levelDatas[0]);
     }
 
     public void NextLevel()
@@ -54,12 +54,12 @@ public class LevelChanger : MonoBehaviour
 
         current++;
         PlayerPrefs.SetInt("current_level", current);
-        Continue();
+        DataTransfer.Current.LoadLevel(levelDatas[current]);
     }
 
     public void Continue() 
     {
-        DataTransfer.Current.LoadLevel(levelDatas[current]);
         DataTransfer.Current.OnLevelLoaded += ChangeLevel;
+        DataTransfer.Current.LoadLevel(levelDatas[current]);
     }
 }

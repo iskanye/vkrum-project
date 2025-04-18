@@ -24,8 +24,8 @@ public class LevelBuilder : MonoBehaviour
         endPoint.transform.localPosition = data.endPoint;
         borders.transform.localScale = data.levelSize;
 
-        ball.Initialize(data);
         ball.AfterDestroy += DataTransfer.Current.Reload;
+        ball.Initialize(data);
         instruments.Initialize(data);
         buttons.Initialize();
         endPoint.Initialize();
