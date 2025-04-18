@@ -182,6 +182,14 @@ public class LevelEditor : MonoBehaviour
             Message("Ошибка: неверный формат данных");
             return;
         }
+
+        void OpenEditor()
+        {
+            RewindBall.Current.AfterWin += DataTransfer.Current.OpenEditor;
+            DataTransfer.Current.OnLevelLoaded -= OpenEditor;
+        }
+
+        DataTransfer.Current.OnLevelLoaded += OpenEditor;
         DataTransfer.Current.LoadLevel(data, true);
     }
 

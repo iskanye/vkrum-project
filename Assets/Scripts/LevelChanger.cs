@@ -28,16 +28,18 @@ public class LevelChanger : MonoBehaviour
         }
 
         current = PlayerPrefs.GetInt("current_level", 0);
-        DataTransfer.Current.OnLevelLoaded += () => 
-        {
-            RewindBall.Current.AfterWin += NextLevel;
-        };
+    }
+
+    void ChangeLevel() 
+    {
+        RewindBall.Current.AfterWin += NextLevel;
     }
 
     public void NewGame()
     {
         current = 0;
         DataTransfer.Current.LoadLevel(levelDatas[0]);
+        DataTransfer.Current.OnLevelLoaded += ChangeLevel;
     }
 
     public void NextLevel()
@@ -45,6 +47,7 @@ public class LevelChanger : MonoBehaviour
         if (current == levels.Length - 1)
         {
             PlayerPrefs.SetInt("editor", 1);
+            DataTransfer.Current.OnLevelLoaded -= ChangeLevel;
             SceneManager.LoadScene(0);
             return;
         }
@@ -57,5 +60,6 @@ public class LevelChanger : MonoBehaviour
     public void Continue() 
     {
         DataTransfer.Current.LoadLevel(levelDatas[current]);
+        DataTransfer.Current.OnLevelLoaded += ChangeLevel;
     }
 }

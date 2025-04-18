@@ -12,6 +12,7 @@ public class DataTransfer : MonoBehaviour
     [SerializeField] private int editorSceneIndex, playSceneIndex;
 
     private LevelData currentData;
+    private bool editor;
 
     void Awake()
     {
@@ -41,6 +42,7 @@ public class DataTransfer : MonoBehaviour
     public void LoadLevel(LevelData data, bool editor = false) 
     {
         currentData = data;
+        this.editor = editor;
 
         void SceneLoaded(Scene s, LoadSceneMode m) 
         {
@@ -55,6 +57,6 @@ public class DataTransfer : MonoBehaviour
 
     public void Reload()
     {
-        LoadLevel(currentData);
+        LoadLevel(currentData, editor);
     }
 }
