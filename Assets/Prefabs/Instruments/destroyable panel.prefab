@@ -151,5 +151,5 @@ MonoBehaviour:
   ballLayer:
     serializedVersion: 2
     m_Bits: 128
-  maxWriteTime: 2
+  maxWriteTime: 2.2
   timeless: 1

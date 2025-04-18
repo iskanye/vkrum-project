@@ -158,4 +158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 7988243417110389517}
-  maxWriteTime: 2
+  maxWriteTime: 2.2

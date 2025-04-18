@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6968459745091048421}
-  maxWriteTime: 2
+  maxWriteTime: 2.2
 --- !u!1 &8887901973592527446
 GameObject:
   m_ObjectHideFlags: 0
