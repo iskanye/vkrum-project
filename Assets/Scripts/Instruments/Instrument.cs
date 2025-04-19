@@ -5,7 +5,7 @@ public class Instrument : MonoBehaviour, IDragHandler, IPointerClickHandler
 {
     public int Type { get; private set; }
 
-    private float grid = .5f;
+    private float grid = .25f;
     private Instruments manager;
 
     public void Initialize(Instruments manager, int type)
