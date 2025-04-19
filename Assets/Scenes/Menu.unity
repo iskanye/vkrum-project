@@ -669,13 +669,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: rewind ball
       objectReference: {fileID: 0}
+    - target: {fileID: 4512981378507215251, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
+      propertyPath: maxWriteTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674853195808677179, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.5566038
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674853195808677179, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.5566038
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674853195808677179, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0.5566038
+      objectReference: {fileID: 0}
     - target: {fileID: 6924233692424286446, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.74
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 6924233692424286446, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.04
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6924233692424286446, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
       propertyPath: m_LocalPosition.z
@@ -731,6 +747,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6924233692424286446, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
   m_PrefabInstance: {fileID: 521270683}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &521270685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4512981378507215251, guid: 14e2cb7b3a561db49a352f3731de3b69, type: 3}
+  m_PrefabInstance: {fileID: 521270683}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399b984d8c9f2124b885b13b30cc3522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &856934336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1157,7 @@ GameObject:
   - component: {fileID: 1166227321}
   - component: {fileID: 1166227320}
   - component: {fileID: 1166227319}
+  - component: {fileID: 1166227322}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1154,7 +1182,7 @@ Camera:
   m_GameObject: {fileID: 1166227318}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1178,9 +1206,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 49.60193
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.9674172
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1211,6 +1239,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166227322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166227318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d60d7a31451f9a4dbce92b9e558ca45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1166227320}
+  size: 10.75
 --- !u!1 &1174260012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,7 +2159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorScene: 1
   editorButton: {fileID: 1289323450}
-  ball: {fileID: 0}
+  ball: {fileID: 521270685}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

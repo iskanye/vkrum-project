@@ -33,8 +33,7 @@ public class RewindObject : BaseRewind
         IEnumerator Rewind() 
         {
             isRewinding = true;
-            prevGravity = rigidbody.gravityScale;
-            rigidbody.gravityScale = 0;
+            rigidbody.gravityScale = -rigidbody.gravityScale;
 
             while (rewindMemory.Count != 0) 
             {
@@ -49,7 +48,7 @@ public class RewindObject : BaseRewind
     public override void StopRewind()
     {
         StopAllCoroutines();
-        rigidbody.gravityScale = prevGravity;
+        rigidbody.gravityScale = -rigidbody.gravityScale;
         isRewinding = false;
     }
 }

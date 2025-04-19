@@ -18,7 +18,7 @@ public class MenuController : MonoBehaviour
 
     IEnumerator Start()
     {
-        ball.Initialize(JsonUtility.FromJson<LevelData>("{\"defaultBounciness\":0.800000011920929,\"gravityScale\":1.0,\"levelSize\":{\"x\":12.0,\"y\":10.0,\"z\":1.0},\"startVelocity\":{\"x\":5.0,\"y\":-3.0},\"ball\":{\"x\":5.0,\"y\":4.0},\"endPoint\":{\"x\":-5.0,\"y\":-4.0},\"panels\":[],\"panelRotations\":[],\"destroyablePanels\":[],\"destroyablePanelRotations\":[],\"spikes\":[],\"spikeRotations\":[],\"trajectoryPoints\":[],\"trajectoryPointRotations\":[],\"springs\":[],\"springRotations\":[],\"restrictions\":[0,0,0]}"));
+        ball.Initialize(JsonUtility.FromJson<LevelData>("{\"defaultBounciness\":0.8,\"gravityScale\":1.0,\"levelSize\":{\"x\":12.0,\"y\":10.0,\"z\":1.0},\"startVelocity\":{\"x\":5.0,\"y\":-3.0},\"ball\":{\"x\":5.0,\"y\":4.0},\"endPoint\":{\"x\":-5.0,\"y\":-4.0},\"panels\":[],\"panelRotations\":[],\"destroyablePanels\":[],\"destroyablePanelRotations\":[],\"spikes\":[],\"spikeRotations\":[],\"trajectoryPoints\":[],\"trajectoryPointRotations\":[],\"springs\":[],\"springRotations\":[],\"restrictions\":[0,0,0]}"));
         while (true)
         {
             yield return new WaitForSeconds(4f);
