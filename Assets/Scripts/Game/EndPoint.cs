@@ -22,7 +22,7 @@ public class EndPoint : MonoBehaviour
     {
         if (TrajectoryPoints == 0 && (ballLayer & (1 << c.gameObject.layer)) != 0) 
         {
-            RewindBall.Current.Win();
+            RewindBall.Current.Win(transform.position);
         }
     }
 }

@@ -99,10 +99,20 @@ public partial class RewindBall : StateManager<RewindBall>
         public override IEnumerator Start()
         {
             mn.OnWin?.Invoke();
+            mn.GetComponent<Collider2D>().enabled = false;
             mn.rigidbody.simulated = false;
             yield return base.Start();
+
+            float t = 0;
+
+            while (t < mn.winDelay)
+            {
+                mn.transform.position = Vector2.Lerp(mn.transform.position, mn.winPosition, .5f * Time.deltaTime);
+                mn.transform.localScale = Vector2.Lerp(mn.transform.localScale, Vector2.zero, .5f * Time.deltaTime);
+                yield return new WaitForEndOfFrame();
+                t += Time.deltaTime;
+            } 
             
-            yield return new WaitForSeconds(mn.winDelay);
             mn.AfterWin?.Invoke();
         }
     }

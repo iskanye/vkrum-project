@@ -57,6 +57,7 @@ public partial class RewindBall : StateManager<RewindBall>
     private WinState winState;
 
     private float bounciness;
+    private Vector2 winPosition;
 
     public void Initialize(LevelData data)
     {
@@ -110,8 +111,9 @@ public partial class RewindBall : StateManager<RewindBall>
         ChangeState(rewindState);
     }
 
-    public void Win() 
+    public void Win(Vector2 position) 
     {
+        winPosition = position;
         ChangeState(winState);
     }
 }
