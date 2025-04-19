@@ -4,6 +4,7 @@ using TMPro;
 using System;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelEditor : MonoBehaviour
 {
@@ -197,6 +198,11 @@ public class LevelEditor : MonoBehaviour
         {
             Message("Ошибка: неверный формат данных");
         }
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void UpdateSize()
