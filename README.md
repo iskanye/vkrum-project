@@ -4,3 +4,4 @@
 * https://semkou.itch.io/sound-pack-free
 * https://jdsherbert.itch.io/ambiences-music-pack
 * https://jdsherbert.itch.io/minigame-music-pack
+* https://tallbeard.itch.io/music-loop-bundle
