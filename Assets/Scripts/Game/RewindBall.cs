@@ -96,7 +96,7 @@ public partial class RewindBall : StateManager<RewindBall>
         rigidbody.AddForce(bounciness * (contact.normalImpulse * contact.normal +
             contact.tangentImpulse * Vector2.Perpendicular(contact.normal)), ForceMode2D.Impulse);
 
-        sound.pitch = UnityEngine.Random.Range(.5f + bounciness / 2, 1 + bounciness / 2);
+        sound.pitch = UnityEngine.Random.Range(.75f + .25f * bounciness, 1 + .25f * bounciness);
         sound.Play();
     }
 

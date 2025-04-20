@@ -38,7 +38,7 @@ public class MusicController : MonoBehaviour
         RewindBall.Current.OnDestroy += () => 
         {
             StopAll();            
-            destroy.pitch = Random.Range(.8f, 1.2f);
+            destroy.pitch = Random.Range(.9f, 1.1f);
             destroy.Play();
         };
 
