@@ -23,7 +23,7 @@ public class MenuController : MonoBehaviour
         {
             yield return new WaitForSeconds(4f);
             ball.StartRewind();
-            yield return new WaitForSeconds(4.05f);
+            yield return new WaitForSeconds(4f);
             ball.StartRewind();
         }
     }
