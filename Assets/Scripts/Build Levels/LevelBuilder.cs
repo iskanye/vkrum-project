@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class LevelBuilder : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LevelBuilder : MonoBehaviour
     [SerializeField] private RewindBall ball;  
     [SerializeField] private ControlButtons buttons;  
     [SerializeField] private MusicController music;  
+    [SerializeField] private TMP_Text gravity, bounciness;
     [Header("Prefabs")]
     [SerializeField] private GameObject panel; 
     [SerializeField] private GameObject destroyablePanel; 
@@ -60,5 +62,8 @@ public class LevelBuilder : MonoBehaviour
             Instantiate(spring, data.springs[i] + (Vector2)grid.position, 
                 Quaternion.Euler(0, 0, data.springRotations[i]), grid);
         }
+
+        gravity.text = data.gravityScale.ToString("0.00");
+        bounciness.text = data.defaultBounciness.ToString("0.00");
     }
 }
