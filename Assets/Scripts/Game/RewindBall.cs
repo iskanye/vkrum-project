@@ -45,6 +45,7 @@ public partial class RewindBall : StateManager<RewindBall>
     [SerializeField] private float defualtGravity;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private AudioSource sound;
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private GameObject particles;
 
@@ -94,6 +95,9 @@ public partial class RewindBall : StateManager<RewindBall>
         var contact = c.GetContact(0);
         rigidbody.AddForce(bounciness * (contact.normalImpulse * contact.normal +
             contact.tangentImpulse * Vector2.Perpendicular(contact.normal)), ForceMode2D.Impulse);
+
+        sound.pitch = UnityEngine.Random.Range(.5f + bounciness / 2, 1 + bounciness / 2);
+        sound.Play();
     }
 
     public void StartSimulating() 
