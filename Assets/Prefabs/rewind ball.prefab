@@ -316,7 +316,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxWriteTime: 2.2
-  defeatDelay: 3
+  defeatDelay: 2
   winDelay: 2
   defualtBounciness: 0.8
   defualtGravity: 0

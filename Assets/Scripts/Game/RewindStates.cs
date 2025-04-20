@@ -107,8 +107,8 @@ public partial class RewindBall : StateManager<RewindBall>
 
             while (t < mn.winDelay)
             {
-                mn.transform.position = Vector2.Lerp(mn.transform.position, mn.winPosition, .5f * Time.deltaTime);
-                mn.transform.localScale = Vector2.Lerp(mn.transform.localScale, Vector2.zero, .5f * Time.deltaTime);
+                mn.transform.position = Vector2.Lerp(mn.transform.position, mn.winPosition, Time.deltaTime);
+                mn.transform.localScale = Vector2.Lerp(mn.transform.localScale, Vector2.zero, Time.deltaTime);
                 yield return new WaitForEndOfFrame();
                 t += Time.deltaTime;
             } 
